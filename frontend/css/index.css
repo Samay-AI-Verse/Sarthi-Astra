@@ -1,0 +1,3317 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
+/* =================================================================
+   1. COLOR & FONT DEFINITIONS (BOTH THEMES)
+================================================================= */
+:root {
+  /* --- Light Theme (Default) --- */
+  --bg-primary-light: #eee5da;
+  /* Light Almond */
+  --bg-secondary-light: #ffffff;
+  --text-primary-light: #262424;
+  /* Deep Charcoal */
+  --text-secondary-light: #716a64;
+  --border-light: #dcd3c9;
+  --accent-light: #262424;
+  --accent-hover-light: #403c3c;
+
+  /* --- Dark Theme --- */
+  --bg-primary-dark: #1c1c1c;
+  /* Charcoal Black */
+  --bg-secondary-dark: #2a2a2a;
+  --text-primary-dark: #ffffff;
+  --text-secondary-dark: #a9b4c2;
+  --border-dark: #383838;
+  --accent-dark: #d6efff;
+  /* Ice Blue */
+  --accent-hover-dark: #ffffff;
+
+  --font-sans: "Inter", sans-serif;
+
+  /* ** Panel Width Variable ** */
+  --panel-width: 400px;
+}
+
+/* =================================================================
+   2. THEME SETUP & BASE STYLES
+================================================================= */
+
+/* --- Default to Light Theme variables --- */
+body {
+  --bg-primary: var(--bg-primary-light);
+  --bg-secondary: var(--bg-secondary-light);
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+  --border-color: var(--border-light);
+  --accent-color: var(--accent-light);
+  --accent-hover: var(--accent-hover-light);
+  --accent-text: var(--bg-secondary-light);
+}
+
+/* --- Switch to Dark Theme variables when .dark-mode is present --- */
+body.dark-mode {
+  --bg-primary: var(--bg-primary-dark);
+  --bg-secondary: var(--bg-secondary-dark);
+  --text-primary: var(--text-primary-dark);
+  --text-secondary: var(--text-secondary-dark);
+  --border-color: var(--border-dark);
+  --accent-color: var(--accent-dark);
+  --accent-hover: var(--accent-hover-dark);
+  --accent-text: var(--bg-primary-dark);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Playwrite US Modern", cursive;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  /* Hiding overflow-x is a good practice, but for responsive shrink, 
+     the margin fix handles the space correctly without cutting off. */
+  overflow-x: hidden;
+}
+
+/* =================================================================
+   3. COMPONENT STYLES (USING THEME VARIABLES)
+================================================================= */
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+
+  background-color: var(--bg-primary);
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  /* Ensure ALL changes, including margin-right, are transitioned */
+  transition: all 0.3s ease;
+}
+
+.logo {
+  /* REDUCED FONT SIZE FOR LOGO TEXT */
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Playwrite US Modern", cursive;
+}
+
+
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.settings-btn {
+  background: transparent;
+  border: 1px solid var(--text-primary);
+  color: var(--text-primary);
+  padding: 10px 16px;
+  border-radius: 50px;
+  cursor: pointer;
+  /* REDUCED FONT SIZE FOR BUTTONS */
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.settings-btn:hover {
+  /* This sets the background to solid white on hover */
+  background-color: #ffffff;
+
+  /* This ensures the black text and icon stay black */
+  color: var(--text-primary);
+
+  /* This makes the border white so it blends in with the background */
+  border-color: #ffffff;
+
+  /* These are the existing effects for lift and shadow, which still look great */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.settings-btn:hover svg {
+  /* Ensures the icon color matches the inverted text color on hover */
+  fill: var(--accent-text);
+}
+
+.settings-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--text-primary);
+  transition: fill 0.2s ease;
+}
+
+
+.profile-btn {
+  border: 2px solid var(--text-primary);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.profile-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Main Container */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.welcome-message {
+  text-align: center;
+  padding: 14px 0 24px;
+}
+
+.welcome-message h1 {
+  /* REDUCED FONT SIZE FOR H1 WELCOME MESSAGE */
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Navigation and Controls Bar */
+.nav-controls-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0 32px 0;
+  margin-bottom: 32px;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  padding: 6px;
+}
+
+.nav-tab {
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  border-radius: 50px;
+  cursor: pointer;
+  /* REDUCED FONT SIZE FOR TABS */
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+
+}
+
+.nav-tab.active {
+  background: var(--accent-color);
+  color: var(--accent-text);
+}
+
+.controls-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* --- THEME TOGGLE BUTTON --- */
+.theme-toggle-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--accent-color);
+}
+
+.theme-toggle-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.theme-toggle-btn:hover svg {
+  fill: var(--accent-color);
+}
+
+.moon-icon {
+  display: none;
+}
+
+body.dark-mode .sun-icon {
+  display: none;
+}
+
+body.dark-mode .moon-icon {
+  display: block;
+}
+
+.create-btn {
+  background: var(--accent-color);
+  border: none;
+  color: var(--accent-text);
+  padding: 12px 24px;
+  border-radius: 50px;
+  cursor: pointer;
+  /* REDUCED FONT SIZE FOR CREATE BUTTON */
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.create-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+/* Section Title */
+.section-title {
+  /* REDUCED FONT SIZE FOR SECTION HEADERS */
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+}
+
+/* Cards */
+.featured-card,
+.recent-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.featured-card:hover,
+.recent-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-color);
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.featured-card {
+  height: 200px;
+  overflow: hidden;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.publisher-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.publisher-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  /* REDUCED FONT SIZE FOR ICON TEXT */
+  font-size: 13px;
+  color: var(--bg-secondary);
+}
+
+.publisher-name {
+  /* REDUCED FONT SIZE FOR PUBLISHER NAME */
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.card-options {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.featured-title {
+  /* REDUCED FONT SIZE FOR FEATURED CARD TITLES */
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.3;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.featured-meta {
+  /* REDUCED FONT SIZE FOR METADATA */
+  font-size: 12px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recent-section {
+  margin-top: 48px;
+}
+
+.recent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.recent-card {
+  min-height: 160px;
+}
+
+.create-new-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px dashed var(--border-color);
+  background: transparent;
+}
+
+.create-new-card:hover {
+  border-color: var(--accent-color);
+  background: var(--bg-secondary);
+}
+
+.plus-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.notebook-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  /* background: var(--text-primary); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-size: 16px;
+  color: var(--bg-secondary);
+}
+
+
+.notebook-icon svg {
+  color: var(--text-primary);
+}
+
+.notebook-title {
+  /* REDUCED FONT SIZE FOR NOTEBOOK TITLES */
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.3;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.notebook-meta {
+  /* REDUCED FONT SIZE FOR NOTEBOOK METADATA */
+  font-size: 12px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.options-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--bg-primary);
+  border: none;
+  color: var(--text-secondary);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.recent-card:hover .options-btn {
+  opacity: 1;
+}
+
+.options-btn:hover {
+  background: var(--accent-color);
+  color: var(--accent-text);
+}
+
+/* Modals and Popups */
+.modal {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+.modal-content,
+.profile-popup,
+.dropdown-menu {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 32px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 480px;
+}
+
+.modal h2 {
+  /* REDUCED FONT SIZE FOR MODAL TITLE */
+  font-size: 20px;
+  color: var(--text-primary);
+}
+
+.form-group label {
+  /* REDUCED FONT SIZE FOR MODAL LABELS */
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.form-group input {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.form-group input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px var(--accent-color-trans);
+  --accent-color-trans: #26242420;
+  /* fallback */
+}
+
+body.dark-mode .form-group input:focus {
+  --accent-color-trans: #d6efff20;
+}
+
+.modal-btn.primary {
+  background: var(--accent-color);
+  color: var(--accent-text);
+}
+
+.modal-btn.primary:hover {
+  background: var(--accent-hover);
+}
+
+.modal-btn.secondary {
+  background: var(--border-color);
+  color: var(--text-secondary);
+}
+
+.modal-btn.secondary:hover {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.close-btn {
+  color: var(--text-secondary);
+}
+
+/* Other styles can be simplified as they now use the theme variables */
+.see-all-link {
+  color: var(--text-secondary);
+  /* REDUCED FONT SIZE FOR LINK */
+  font-size: 13px;
+}
+
+.see-all-link:hover {
+  color: var(--text-primary);
+}
+
+.dropdown-item:hover {
+  background-color: var(--bg-primary);
+}
+
+.dropdown-item svg {
+  fill: var(--text-secondary);
+}
+
+.dropdown-divider {
+  height: 1px;
+  margin: 8px 0;
+  background-color: var(--border-color);
+}
+
+.profile-greeting {
+  /* REDUCED FONT SIZE FOR PROFILE GREETING */
+  font-size: 20px;
+  color: var(--text-primary);
+}
+
+.profile-popup-footer {
+  border-top: 1px solid var(--border-color);
+}
+
+.profile-btn-secondary {
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  /* REDUCED FONT SIZE FOR PROFILE BUTTONS */
+  font-size: 13px;
+}
+
+.profile-btn-secondary:hover {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* --- Unchanged generic layout styles --- */
+.hidden {
+  display: none;
+}
+
+.see-all {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+  text-decoration: none;
+}
+
+.profile-popup {
+  display: none;
+  position: fixed;
+  top: 68px;
+  right: 32px;
+  width: 360px;
+  border-radius: 28px;
+  z-index: 1001;
+}
+
+.profile-popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 8px 16px 24px;
+  /* REDUCED FONT SIZE FOR POPUP HEADER TEXT */
+  font-size: 13px;
+}
+
+.profile-popup-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px 20px 24px;
+  text-align: center;
+}
+
+.profile-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: relative;
+  margin-bottom: 12px;
+  background-image: url("https://i.pinimg.com/736x/fa/d5/e7/fad5e79954583ad50ccb3f16ee64f66d.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.profile-pic-camera-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-pic-camera-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.profile-popup-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 24px;
+}
+
+.profile-btn-secondary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: transparent;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  flex-grow: 1;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.profile-btn-secondary:first-child {
+  margin-right: 8px;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 260px;
+  padding: 8px;
+  z-index: 1002;
+  border-radius: 12px;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 12px;
+  /* REDUCED FONT SIZE FOR DROPDOWN ITEMS */
+  font-size: 13px;
+  text-decoration: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown-item svg {
+  width: 20px;
+  height: 20px;
+}
+
+.dropdown-divider {
+  height: 1px;
+  margin: 8px 0;
+}
+
+.has-submenu {
+  position: relative;
+}
+
+.has-submenu .arrow {
+  margin-left: auto;
+}
+
+.submenu {
+  display: none;
+  top: -8px;
+  left: 100%;
+  margin-left: 4px;
+}
+
+.has-submenu:hover>.submenu {
+  display: block;
+}
+
+@media (max-width: 1024px) {
+
+  /* Unchanged responsive styles */
+  .nav-controls-container {
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  .controls-bar {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* Unchanged responsive styles */
+  .container {
+    padding: 0 16px;
+  }
+
+  .header {
+    padding: 16px;
+  }
+
+  .nav-controls-container {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .controls-bar {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .featured-grid,
+  .recent-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* --- THEME TOGGLE BUTTON --- */
+.theme-toggle-btn {
+  background: transparent;
+  /* This now uses the main text color (black) for the border */
+  border: 1px solid var(--text-primary);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+
+
+.theme-toggle-btn svg {
+  /* This now uses the main text color (black) for the icon */
+  fill: var(--text-primary);
+  width: 20px;
+  height: 20px;
+  transition: all 0.2s ease;
+}
+
+.settings-btn:hover {
+  /* This sets the background to solid white on hover */
+  background-color: #ffffff;
+
+  /* FIX: This forces the TEXT color to be black in BOTH themes */
+  color: var(--text-primary-light);
+
+  /* This makes the border white so it blends in */
+  border-color: #ffffff;
+
+  /* These are the existing effects for lift and shadow */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.settings-btn:hover svg {
+  /* FIX: This forces the ICON color to be black in BOTH themes */
+  fill: var(--text-primary-light);
+}
+
+/* =================================================================
+   MODAL STYLES (NEW)
+================================================================= */
+
+/* --- Modal Backdrop --- */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  /* The flex properties below will apply once display is changed by JS */
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Modal Content Box --- */
+
+/* Animation for modal appearance */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --- Modal Header & Close Button --- */
+.modal-content h2 {
+  /* KEPT SIZE CONSISTENT with section title */
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+}
+
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 20px;
+  line-height: 32px;
+  /* Vertically center the '×' */
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background-color: var(--border-color);
+  color: var(--text-primary);
+  transform: rotate(90deg);
+  /* Nice hover effect */
+}
+
+/* --- Form Elements --- */
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  /* REDUCED FONT SIZE FOR MODAL LABELS */
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  /* REDUCED FONT SIZE FOR INPUT TEXT */
+  font-size: 15px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 12px;
+  /* A softer, modern radius */
+  transition: all 0.2s ease;
+  outline: none;
+  /* Remove default outline */
+}
+
+.form-group input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.form-group input:focus {
+  border-color: var(--accent-color);
+  /* A more modern focus ring using box-shadow */
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 20%, transparent);
+}
+
+/* --- Modal Action Buttons --- */
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  /* Align buttons to the right */
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.modal-btn {
+  padding: 12px 24px;
+  /* REDUCED FONT SIZE FOR MODAL BUTTONS */
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 50px;
+  /* Pill shape to match other buttons */
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-btn.primary {
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+}
+
+.modal-btn.primary:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Generic Styles Continued --- */
+
+.imagelogo {
+  width: 50px;
+}
+
+
+/* Ensure the logo images fit their container */
+.logo-icon .logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Use 'contain' to ensure the whole logo is visible */
+  transition: opacity 0.3s ease;
+}
+
+/* By default (Light Mode), hide the dark logo and show the light logo */
+.logo-icon .light-logo {
+  display: block;
+}
+
+.logo-icon .dark-logo {
+  display: none;
+}
+
+/* In Dark Mode, hide the light logo and show the dark logo */
+body.dark-mode .logo-icon .light-logo {
+  display: none;
+}
+
+body.dark-mode .logo-icon .dark-logo {
+  display: block;
+}
+
+.logo-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 5px;
+
+  /* REVISIONS: Remove the background and text color to let the image show through cleanly. */
+  background: none;
+  color: transparent;
+  /* Or simply omit the color property if it doesn't cause issues */
+}
+
+
+/* In styles.css (Section 3. RE-THEMED COMPONENT STYLES) */
+
+/* --- Header --- */
+.header {
+  background-color: var(--header-bg);
+  padding: 12px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Playwrite US Modern", cursive;
+}
+
+.logo-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 5px;
+  background: none;
+  color: transparent;
+}
+
+.logo-icon .logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity 0.3s ease;
+}
+
+.logo-icon .light-logo {
+  display: block;
+}
+
+.logo-icon .dark-logo {
+  display: none;
+}
+
+body.dark-mode .logo-icon .light-logo {
+  display: none;
+}
+
+body.dark-mode .logo-icon .dark-logo {
+  display: block;
+}
+
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Add other header controls like buttons if they exist in index.html */
+/* For example, if you still have the .settings-btn from index.html */
+.settings-btn,
+.share-btn {
+  background: transparent;
+  border: 1px solid var(--text-primary-light);
+  color: var(--text-primary-light);
+  padding: 8px 13px;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.settings-btn:hover,
+.share-btn:hover {
+  background-color: #FFFFFF;
+  color: #262424;
+  border-color: #262424;
+}
+
+body.dark-mode .settings-btn,
+body.dark-mode .share-btn {
+  color: var(--text-secondary-dark);
+  border-color: var(--border-dark);
+}
+
+body.dark-mode .settings-btn:hover,
+body.dark-mode .share-btn:hover {
+  background-color: var(--bg-secondary-dark);
+  color: var(--text-primary-dark);
+  border-color: var(--text-secondary-dark);
+}
+
+.profile-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-color);
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.profile-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =================================================================
+   4. MAIN CONTENT AREA 
+================================================================= */
+
+/* This is the main layout from your document page */
+.main-container {
+  display: flex;
+  height: calc(100vh - 61px);
+  background: var(--bg-primary);
+  margin-top: -10px;
+}
+
+/* You would need to add these sections to your index.html to use this layout */
+.sidebar,
+.chat-section,
+.studio-section {
+  background-color: var(--bg-secondary);
+  margin: 8px;
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  overflow: hidden;
+}
+
+/* Your index.html currently has a simpler .container class.
+   You would replace it with the structure above. */
+.container {
+  max-width: 1400px;
+  /* Kept max-width from original */
+  margin: 0 auto;
+  padding: 0 32px;
+  /* Kept padding from original */
+}
+
+/* Styles for cards, titles, etc. from your old index.css can be brought here
+   and adapted, or you can rebuild the content using the new component styles. */
+.section-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+}
+
+.recent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.recent-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.recent-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-color);
+}
+
+
+/* =================================================================
+   5. TEAMSPACES PANEL STYLES (RESPONSIVE SHRINK FIX)
+================================================================= */
+
+/* Container for all main content, including header and modals */
+.main-content-wrapper {
+  /* ** CORE CHANGE: Use margin-right transition for smooth shrinking ** */
+  transition: margin-right 0.3s ease;
+  width: 100%;
+  /* Resetting transform to ensure it doesn't slide */
+  transform: none;
+}
+
+/* The TeamSpaces Panel (Right Sidebar) */
+.team-spaces-panel {
+  position: fixed;
+  top: 0;
+  /* Start off-screen to the right */
+  right: calc(0px - var(--panel-width));
+  bottom: 0;
+  width: var(--panel-width);
+  background-color: var(--bg-secondary);
+  border-left: 1px solid var(--border-color);
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  transition: right 0.3s ease;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.panel-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.close-panel-btn {
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-panel-btn:hover {
+  color: var(--text-primary);
+}
+
+.panel-body p,
+.panel-body li {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.panel-body ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.panel-body li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.panel-body li:last-child {
+  border-bottom: none;
+}
+
+
+/* State when the panel is OPEN */
+body.panel-open .main-content-wrapper {
+  /* ** CORE CHANGE: Uses margin-right to SHRINK the effective width** */
+  margin-right: var(--panel-width);
+  /* Ensure no residual transform properties interfere */
+  transform: none;
+  padding-right: 0;
+}
+
+body.panel-open .team-spaces-panel {
+  /* Slide the panel fully into view */
+  right: 0;
+}
+
+/* Handle fixed/sticky header in panel-open state */
+body.panel-open .header {
+  /* ** CORE CHANGE: Applies the same margin shift to the sticky header to SHRINK it** */
+  margin-right: var(--panel-width);
+  /* Ensure no residual transform properties interfere */
+  transform: none;
+  width: 100%;
+}
+
+/* The .header default transition is defined correctly at the beginning of Section 3 */
+
+body.panel-open #profilePopup,
+body.panel-open #settingsDropdown {
+  /* No changes needed here, keeping them fixed relative to the viewport. */
+}
+
+
+
+/* --- New Chat List Styles for TeamSpaces Panel --- */
+
+.search-container {
+  margin-bottom: 10px;
+}
+
+.panel-search-input {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 15px;
+  /* Use theme variables for background, border, and text */
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 25px;
+  /* Pill shape for search bar */
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.panel-search-input:focus {
+  border-color: var(--accent-color);
+}
+
+.chat-list-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  padding-left: 8px;
+  /* Alignment with list items */
+}
+
+.chat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* Space between each chat item */
+}
+
+.chat-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.chat-item:hover {
+  /* Subtle hover effect using the panel's background color */
+  background-color: var(--bg-primary);
+}
+
+/* Profile Icon (Team Icon) */
+.profile-icon.team-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  /* You can adjust this to use a color other than the default dark theme icon */
+  background-color: var(--border-color);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-right: 12px;
+}
+
+.chat-details {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.chat-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary);
+  /* Primary text for the name */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+.last-message {
+  font-size: 13px;
+  color: var(--text-secondary);
+  /* Secondary text for the message preview */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+  margin-top: 4px;
+}
+
+.camera-icon {
+  font-size: 20px;
+  color: var(--text-secondary);
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+
+/* --- New Action Buttons Styles for Panel --- */
+.panel-actions {
+  display: flex;
+  justify-content: space-between;
+  /* Distribute buttons evenly */
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  /* Space above the search bar or list */
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /* Styling to look like a circular icon with text below */
+  width: 100px;
+  /* Adjust width as needed for the panel's size */
+  padding: 0;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.action-btn:hover {
+  opacity: 0.8;
+}
+
+.action-btn svg {
+  /* Use the accent color for the icon container/background */
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+  border-radius: 50%;
+
+  /* Use the primary color for the background, and text color for the icon */
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  stroke: var(--text-primary);
+  fill: none;
+  transition: all 0.2s ease;
+}
+
+.action-btn span {
+  /* Style for the text label below the icon */
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-top: 8px;
+  line-height: 1.2;
+}
+
+/* Optional: Subtle hover effect on the icon background */
+.action-btn:hover svg {
+  background-color: var(--border-color);
+}
+
+
+/* Locate this section in index.css: */
+.action-btn svg {
+  /* REMOVE or COMMENT OUT THIS BLOCK */
+  /* ... SVG styles ... */
+}
+
+/* Add or replace with the following block: */
+
+.action-btn i {
+  /* Targets the Font Awesome icon */
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+  border-radius: 50%;
+
+  /* Apply circular background and colors */
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  /* Sets the icon color */
+
+  /* Ensure the icon is centered within the circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Font Awesome specific property */
+  font-size: 20px !important;
+  transition: all 0.2s ease;
+}
+
+/* Update the hover state to target 'i' as well */
+.action-btn:hover i {
+  background-color: var(--border-color);
+}
+
+
+.profile-popup-section {
+  padding: 8px;
+  /* Add padding around the action items */
+}
+
+/* Ensure icons in the new popup are styled correctly */
+.profile-popup-section .dropdown-item i.fas {
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.profile-popup-section .dropdown-item:hover i.fas {
+  color: var(--accent-text);
+}
+
+
+
+
+/* Styling for Friend Search Results */
+.search-result-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.search-result-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.search-result-info {
+  flex-grow: 1;
+}
+
+.search-result-info .name {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.search-result-info .email {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.add-friend-btn {
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 20px;
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+  border: none;
+  cursor: pointer;
+}
+
+.add-friend-btn:disabled {
+  background-color: var(--border-color);
+  cursor: not-allowed;
+}
+
+/* Notification Badge */
+.notification-badge {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #ff3b30;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+
+.notification-badge.hidden {
+  display: none;
+}
+
+/* Notification List Item Styling */
+.notification-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+}
+
+.notification-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.notification-text {
+  flex-grow: 1;
+  font-size: 13px;
+}
+
+.notification-actions button {
+  font-size: 12px;
+  padding: 4px 8px;
+  margin-left: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.accept-btn {
+  background-color: #34c759;
+  color: white;
+  border: none;
+}
+
+.decline-btn {
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+/* ===================================
+   NEW: Full-Page Chat View Styling
+====================================== */
+#chat-view {
+  /* This makes the chat view take up the available space within the main wrapper */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 900px;
+  /* You can adjust this for the chat width */
+  margin: 0 auto;
+  /* Center the chat view */
+  padding: 0 32px 20px 32px;
+  height: calc(100vh - 100px);
+  /* Adjust height based on your header's height */
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.back-btn-chat {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 18px;
+  cursor: pointer;
+  margin-right: 16px;
+  padding: 5px;
+}
+
+.chat-header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.chat-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  flex-grow: 1;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.message-bubble {
+  max-width: 75%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 15px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.message-bubble.sent {
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.message-bubble.received {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.chat-input-form {
+  display: flex;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.chat-input-form input {
+  flex-grow: 1;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  padding: 10px 16px;
+  outline: none;
+  font-size: 15px;
+  color: var(--text-primary);
+}
+
+.chat-input-form button {
+  border-radius: 20px;
+  border: none;
+  background: var(--accent-color);
+  color: var(--accent-text);
+  font-weight: 600;
+  padding: 0 20px;
+  cursor: pointer;
+}
+
+/* Friend List Item Styling */
+.friend-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.friend-item:hover {
+  background-color: var(--bg-primary);
+}
+
+.friend-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.friend-item .name {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Chat Modal Styling */
+.chat-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-modal-content {
+  background: var(--bg-secondary);
+  width: 90%;
+  max-width: 450px;
+  height: 70vh;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.chat-header img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.chat-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  flex-grow: 1;
+}
+
+.close-chat-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message-bubble {
+  max-width: 75%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.message-bubble.sent {
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.message-bubble.received {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.chat-input-form {
+  display: flex;
+  padding: 12px;
+  border-top: 1px solid var(--border-color);
+  gap: 10px;
+}
+
+.chat-input-form input {
+  flex-grow: 1;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  padding: 10px 16px;
+  outline: none;
+  color: var(--text-primary);
+}
+
+.chat-input-form button {
+  border-radius: 20px;
+  border: none;
+  background: var(--accent-color);
+  color: var(--accent-text);
+  font-weight: 600;
+  padding: 0 16px;
+  cursor: pointer;
+}
+
+
+/* =================================================================
+   NEW: Friend & Chat System Styles
+================================================================= */
+
+/* Friend List Item Styling (in TeamSpaces panel) */
+.friend-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.friend-item:hover {
+  background-color: var(--bg-primary);
+}
+
+.friend-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.friend-item .name {
+  font-weight: 500;
+  color: var(--text-primary);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Chat Modal Styling */
+.chat-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: flex;
+  /* Changed from 'none' to 'flex' for centering */
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Make modal visible when display is set to flex */
+.chat-modal-overlay[style*="display: flex"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.chat-modal-content {
+  background: var(--bg-secondary);
+  width: 90%;
+  max-width: 450px;
+  height: 75vh;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+.chat-modal-overlay[style*="display: flex"] .chat-modal-content {
+  transform: scale(1);
+}
+
+.chat-modal-content .chat-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.chat-modal-content .chat-header img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.chat-modal-content .chat-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  flex-grow: 1;
+}
+
+.close-chat-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-chat-btn:hover {
+  color: var(--text-primary);
+}
+
+.chat-modal-content .chat-messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message-bubble {
+  max-width: 75%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.message-bubble.sent {
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.message-bubble.received {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.chat-modal-content .chat-input-form {
+  display: flex;
+  padding: 12px;
+  border-top: 1px solid var(--border-color);
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.chat-modal-content .chat-input-form input {
+  flex-grow: 1;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  padding: 10px 16px;
+  outline: none;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.chat-modal-content .chat-input-form input:focus {
+  border-color: var(--accent-color);
+}
+
+.chat-modal-content .chat-input-form button {
+  border-radius: 20px;
+  border: none;
+  background: var(--accent-color);
+  color: var(--accent-text);
+  font-weight: 600;
+  padding: 0 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.chat-modal-content .chat-input-form button:hover {
+  background: var(--accent-hover);
+}
+
+
+
+/* =================================================================
+   NEW: TeamSpaces Panel Chat View Styles
+================================================================= */
+
+/* This is the main container for the chat view inside the panel */
+#panel-chat-view {
+  display: flex;
+  flex-direction: column;
+  /* Make the chat view occupy the full height of its container */
+  height: 100%;
+}
+
+/* --- Chat Header (Top bar with back button, name, pic) --- */
+.chat-header-panel {
+  display: flex;
+  align-items: center;
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+  /* Prevents the header from shrinking */
+}
+
+#back-to-friends-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+
+  margin-right: 5px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+#back-to-friends-btn:hover {
+  background-color: var(--bg-primary);
+}
+
+#back-to-friends-btn i {
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+#chat-friend-pic {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 12px;
+  object-fit: cover;
+}
+
+#chat-friend-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  /* Reset default margin from h4 */
+}
+
+
+/* --- Message Display Area --- */
+.chat-messages-panel {
+  flex-grow: 1;
+  /* This makes the message area take up all available vertical space */
+  overflow-y: auto;
+  /* Enables scrolling for long conversations */
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Style for the "No messages yet" placeholder */
+.chat-messages-panel p {
+  margin: auto;
+  /* This vertically and horizontally centers the placeholder text */
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+
+/* --- Chat Input Form (Bottom bar) --- */
+.chat-input-form-panel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid var(--border-color);
+  flex-shrink: 0;
+  /* Prevents the form from shrinking */
+}
+
+#chat-input-panel {
+  flex-grow: 1;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  border-radius: 20px;
+  /* Pill shape */
+  padding: 10px 16px;
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#chat-input-panel:focus {
+  border-color: var(--accent-color);
+}
+
+.chat-input-form-panel button {
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+  border: none;
+  border-radius: 20px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.chat-input-form-panel button:hover {
+  background-color: var(--accent-hover);
+}
+
+/* In index.css */
+.hidden {
+  display: none !important;
+  /* Use !important to ensure it overrides other display styles */
+}
+
+
+/* =================================================================
+   FIX: TeamSpaces Panel Layout & Chat View
+================================================================= */
+
+/* Make the main panel a flex container to control its children */
+.team-spaces-panel {
+  /* ... keep all existing styles like position, width, etc. ... */
+  display: flex;
+  flex-direction: column;
+  /* The padding is now on the panel itself, not the body */
+}
+
+/* Force the panel body to take up all available vertical space */
+.panel-body {
+  flex-grow: 1;
+  /* This is the key change */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Prevents content from spilling out */
+}
+
+/* Ensure the chat view fills the entire panel-body when active */
+#panel-chat-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  /* Fills the parent (.panel-body) */
+}
+
+
+/* =================================================================
+   NEW: Chat Toast Notification Styles
+================================================================= */
+
+.chat-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 340px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 2001;
+  /* Above other elements */
+  cursor: pointer;
+  /* Smooth transitions for appearing/disappearing */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.chat-toast.toast-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  /* Can't click it when hidden */
+}
+
+#toast-sender-pic {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.toast-content {
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.toast-sender-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-primary);
+}
+
+.toast-message-preview {
+  font-size: 14px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.toast-close-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 24px;
+  line-height: 1;
+  padding: 0 5px;
+  cursor: pointer;
+  align-self: flex-start;
+  /* Aligns to the top */
+}
+
+/* --- PREVENT BODY SCROLL WHEN PANEL IS OPEN ---
+body.panel-open {
+    overflow: hidden;
+} */
+
+/* --- UNREAD MESSAGE INDICATOR STYLES --- */
+.friend-item {
+  position: relative;
+  /* Needed for positioning the dot */
+}
+
+.unread-dot {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background-color: #0e0e0e;
+  /* A bright blue, common for notifications */
+  border-radius: 50%;
+  border: 1.5px solid var(--bg-secondary);
+  /* Makes it stand out from the background */
+}
+
+.unread-dot.hidden {
+  display: none;
+}
+
+
+/* =================================================================
+   UPDATED: Chat Toast Notification Styles (Smaller with Animation)
+================================================================= */
+
+/* 1. Define the animations */
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutDown {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+/* 2. Style the toast notification */
+.chat-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  /* --- SMALLER SIZE --- */
+  width: 320px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  /* Reduced padding */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 2001;
+  cursor: pointer;
+  /* Hides the toast visually and prevents interaction */
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* --- NEW: Animation classes --- */
+.chat-toast.show {
+  opacity: 1;
+  pointer-events: auto;
+  /* Allow clicks when visible */
+  animation: slideInUp 0.4s ease-out forwards;
+}
+
+.chat-toast.hide {
+  animation: slideOutDown 0.4s ease-in forwards;
+}
+
+
+/* --- Smaller internal elements --- */
+#toast-sender-pic {
+  width: 40px;
+  /* Smaller image */
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.toast-sender-name {
+  font-weight: 600;
+  font-size: 14px;
+  /* Smaller font */
+  color: var(--text-primary);
+}
+
+.toast-message-preview {
+  font-size: 13px;
+  /* Smaller font */
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.toast-close-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 22px;
+  /* Slightly smaller */
+  line-height: 1;
+  padding: 0 5px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+/* --- FIX: Prevent text caret from appearing on non-input elements --- */
+body,
+h1,
+h2,
+h3,
+h4,
+button,
+div,
+span {
+  user-select: none;
+  /* Disables text selection and the caret */
+}
+
+/* --- Re-enable text selection ONLY for actual input fields --- */
+input,
+textarea,
+[contenteditable="true"] {
+  user-select: text;
+  /* Allows normal text selection and caret behavior */
+}
+
+/* =================================================================
+   FIX: Dropdown & Popup Item Colors (for both themes)
+================================================================= */
+
+/* --- General styling for all dropdown items --- */
+.dropdown-item {
+  /* Use the theme's main text color, which changes in dark mode */
+  color: var(--text-primary);
+}
+
+/* --- Icon Styling (SVG and Font Awesome) --- */
+.dropdown-item svg {
+  /* Use the theme's secondary color for a nice, subtle look */
+  fill: var(--text-secondary);
+  transition: fill 0.2s ease;
+}
+
+.dropdown-item .fa {
+  /* Also use the secondary color for Font Awesome icons */
+  color: var(--text-secondary);
+  width: 20px;
+  /* Ensures consistent icon alignment */
+  text-align: center;
+  transition: color 0.2s ease;
+}
+
+/* --- Hover state for all dropdown items --- */
+.dropdown-item:hover {
+  /* This already uses a theme variable, which is good */
+  background-color: var(--bg-primary);
+  /* Ensure text color remains the primary color on hover */
+  color: var(--text-primary);
+}
+
+/* --- Change icon color to match text on hover --- */
+.dropdown-item:hover svg {
+  fill: var(--text-primary);
+}
+
+.dropdown-item:hover .fa {
+  color: var(--text-primary);
+}
+
+/* =================================================================
+   FIX: Settings Button Hover Effect (for both themes)
+================================================================= */
+
+.settings-btn:hover {
+  /* Use the secondary background color for a theme-aware hover */
+  background-color: var(--bg-secondary);
+
+  /* Use the primary text color, which adapts to the current theme */
+  color: var(--text-primary);
+
+  /* Use the main border color for consistency */
+  border-color: var(--border-color);
+
+  /* Keep the nice transform and shadow effects */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.settings-btn:hover svg {
+  /* Make the icon's color match the text color on hover */
+  fill: var(--text-primary);
+}
+
+
+/* =================================================================
+   NEW: Global Notification Dot Styles
+================================================================= */
+
+/* 1. Make the parent buttons ready for positioning */
+.settings-btn,
+.profile-btn {
+  position: relative;
+}
+
+/* 2. Style the dot itself */
+.notification-dot {
+  position: absolute;
+  top: 6px;
+  /* Adjust as needed */
+  right: 8px;
+  /* Adjust as needed */
+  width: 10px;
+  height: 10px;
+  background-color: #ff3b30;
+  /* A bright notification red */
+  border-radius: 50%;
+  /* This border helps the dot stand out from the button background */
+  border: 2px solid var(--bg-secondary);
+  pointer-events: none;
+  /* Prevents the dot from blocking clicks */
+}
+
+/* 3. Style the existing notification badge to look like our new dot */
+#notification-badge {
+  /* Override existing styles to make it a dot */
+  width: 10px;
+  height: 10px;
+  font-size: 0;
+  /* Hide any text inside */
+  padding: 0;
+  margin-left: 8px;
+  border: 2px solid var(--bg-secondary);
+  vertical-align: middle;
+}
+
+
+
+
+/* In index.css */
+
+/* 2. Style the dot itself to sit perfectly on the border. */
+.notification-dot {
+  position: absolute;
+  /* --- POSITIONING CHANGE: Move the dot's origin to the top-right corner --- */
+  top: 32px;
+  right: 1;
+
+  /* --- KEY CHANGE: Shift the dot by 50% of its own size --- */
+  /* It moves RIGHT by half its width and UP by half its height */
+  transform: translate(50%, -50%);
+
+  width: 12px;
+  height: 12px;
+  background-color: #000000;
+  /* Green color */
+  border-radius: 50%;
+
+  /* This border is crucial for the clean "on the edge" look */
+  border: 2px solid var(--bg-secondary);
+
+  pointer-events: none;
+  /* Prevents the dot from blocking button clicks */
+
+  /* The transition will now animate the transform property */
+  transition: transform 0.2s ease-out;
+}
+
+/* The hidden class now smoothly scales and moves the dot */
+.notification-dot.hidden {
+  /* When hidden, scale to zero AND keep the translated position */
+  transform: translate(50%, -50%) scale(0);
+}
+
+
+/* =================================================================
+   FIX: Floating Action Button (FAB) Scoped to Panel
+================================================================= */
+.add-friend-fab {
+  /* KEY CHANGE: Position relative to the panel, not the window */
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+
+  /* Look and Feel (no changes here) */
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  z-index: 10;
+
+  /* --- NEW: Visibility & Animation --- */
+  /* By default, the button is hidden */
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* --- NEW: Show the button ONLY when the panel is open --- */
+body.panel-open .add-friend-fab {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.add-friend-fab:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px) scale(1);
+  /* Keep scale on hover */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.add-friend-fab i {
+  color: var(--accent-text);
+  font-size: 20px;
+}
+
+/* This targets the old action section and hides it */
+.panel-actions {
+  display: none !important;
+}
+
+/* Optional: To make the friend search input look better with the FAB */
+#friend-list-search {
+  margin-bottom: 20px;
+}
+
+
+/* =================================================================
+   NEW: Floating Action Button (FAB) Menu Styles
+================================================================= */
+.fab-menu {
+  position: absolute;
+  right: 20px;
+  bottom: 85px;
+  /* Position it right above the main FAB */
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-end;
+
+  /* Initial hidden state for animation */
+  opacity: 0;
+  transform: translateY(15px);
+  pointer-events: none;
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+/* "show" class to make the menu visible */
+.fab-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.fab-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.fab-menu-item span {
+  background-color: var(--bg-secondary);
+  padding: 6px 12px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Show the text label on hover */
+.fab-menu-item:hover span {
+  opacity: 1;
+}
+
+.fab-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+
+.fab-menu-item:hover .fab-icon-wrapper {
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+  transform: scale(1.1);
+}
+
+/* Change the main FAB icon when the menu is open */
+#fab-main-btn.active i::before {
+  content: "\f00d";
+  /* Font Awesome 'times' (close) icon */
+  font-family: 'FontAwesome';
+}
+
+
+
+/* =================================================================
+   NEW: Friend Item Options Menu Styles
+================================================================= */
+.friend-item {
+  /* This is crucial for positioning the menu correctly */
+  position: relative;
+}
+
+.friend-options-btn {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 16px;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+
+  /* Hide it by default */
+  opacity: 0;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+}
+
+/* Show the button when hovering over the friend item */
+.friend-item:hover .friend-options-btn {
+  opacity: 1;
+}
+
+.friend-options-btn:hover {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.friend-options-menu {
+  display: none;
+  /* Hidden by default, shown by JS */
+  position: absolute;
+  right: 0;
+  top: 45px;
+  /* Position below the options button */
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  min-width: 150px;
+  padding: 6px;
+}
+
+/* 'show' class will be toggled by JavaScript */
+.friend-options-menu.show {
+  display: block;
+}
+
+.remove-friend-btn {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  width: 100%;
+  padding: 8px 12px;
+  text-align: left;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.remove-friend-btn:hover {
+  background-color: #ff3b30;
+  /* A red color for destructive action */
+  color: white;
+}
+
+/* =================================================================
+   NEW: Panel View Navigation Styles
+   (Add this to the bottom of your index.css file)
+================================================================= */
+
+/* Base class for the new panel views */
+.panel-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  /* Fill the panel-body */
+}
+
+/* Header for the new views (Manage, Add Member) */
+.panel-view-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 8px;
+  /* Match chat-header-panel */
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.panel-view-header h4 {
+  font-size: 15px;
+  /* Match chat-friend-name */
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  padding-left: 5px;
+}
+
+/* Body content for the new views */
+.panel-view-body {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+/* Ensure form elements inside the panel look good */
+.panel-view-body .form-group {
+  margin-bottom: 20px;
+}
+
+.panel-view-body .form-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Make input fields use the panel's style */
+.panel-view-body .form-group.input {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 15px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 25px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.panel-view-body .form-group.input:focus {
+  border-color: var(--accent-color);
+}
+
+/* Use the same back button style from the chat header */
+.panel-view-header .back-btn-panel {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-right: 5px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.panel-view-header .back-btn-panel:hover {
+  background-color: var(--bg-primary);
+}
+
+.panel-view-header .back-btn-panel i {
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+
+/* =================================================================
+   NEW: Group Chat Options (Dropdown) Styles
+   (Used inside the chat header for settings, manage, leave group)
+================================================================= */
+
+/* 1. The Group Options Button/Icon (The "Open" Icon, e.g., a ⋯ or ⚙️ icon) */
+/* The button should be placed in the chat header, e.g., <button class="group-options-btn"><i class="fa fa-ellipsis-v"></i></button> */
+.group-options-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  /* Start subtle */
+  font-size: 18px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  position: relative;
+  /* CRUCIAL: Used as the anchor for the dropdown */
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.group-options-btn:hover {
+  background: var(--border-color);
+  /* Subtle background highlight */
+  color: var(--accent);
+  /* Change icon color on hover */
+  transform: scale(1.05);
+}
+
+
+/* 2. The Dropdown Menu Container (The list of options) */
+.group-options-dropdown {
+  position: absolute;
+  top: 100%;
+  /* Starts below the button */
+  right: 0;
+  z-index: 100;
+  /* Ensure it floats above all chat content */
+  min-width: 200px;
+  margin-top: 10px;
+  /* Spacing between button and menu */
+
+  /* Creative Styling */
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  /* Deep shadow for a floating effect */
+  padding: 8px 0;
+  list-style: none;
+  margin: 0;
+
+  /* Hidden by default, with a subtle animation */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+
+  /* Crisp border */
+  border: 1px solid var(--border-color);
+}
+
+/* Class to show the dropdown (toggled by your JavaScript) */
+.group-options-dropdown.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+
+/* 3. Dropdown Menu Items */
+.dropdown-item {
+  padding: 10px 15px;
+  font-size: 14px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  display: flex;
+  align-items: center;
+}
+
+/* Styling for an icon next to the text (Recommended for better look) */
+.dropdown-item i {
+  margin-right: 12px;
+  width: 16px;
+  text-align: center;
+}
+
+.dropdown-item:hover {
+  background: var(--border-color);
+  /* Highlight background on hover */
+  color: var(--accent);
+  /* Accent text/icon color on hover */
+}
+
+/* Special Style for Destructive Actions (e.g., Leave/Delete Group) */
+.dropdown-item.destructive {
+  color: #e74c3c;
+  /* Bright red color for warning */
+}
+
+.dropdown-item.destructive:hover {
+  background: #e74c3c1a;
+  /* Very light red background on hover */
+  color: #c0392b;
+  /* Darker red on hover */
+}
+
+
+/* --- NEW: Group Chat Options (Dropdown) Styles --- */
+
+/* 1. The Group Options Button/Icon */
+/* The HTML uses .back-btn-panel for #group-chat-options-btn, which provides a nice circle. 
+   We will refine it to make it stand out as an 'options' button. */
+.chat-header-panel .group-options-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  /* Start subtle */
+  font-size: 18px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  position: relative;
+  /* CRUCIAL: Used as the anchor for the dropdown */
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-header-panel .group-options-btn:hover {
+  background: var(--border-color);
+  /* Subtle background highlight */
+  color: var(--text-primary);
+  transform: scale(1.05);
+}
+
+/* 2. The Dropdown Menu Container (Overriding the generic .dropdown-menu for this specific context) */
+.group-chat-options-container .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  /* Position it right below the button */
+  right: 0;
+  z-index: 100;
+  min-width: 200px;
+  margin-top: 10px;
+
+  /* Creative Styling */
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  padding: 8px 0;
+  list-style: none;
+  margin: 0;
+
+  /* Hidden by default, with a subtle animation */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+
+  border: 1px solid var(--border-color);
+}
+
+/* Class to show the dropdown (toggled by your JavaScript) */
+.group-chat-options-container .dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+
+/* 3. Dropdown Menu Items (Applying new styles for color and spacing) */
+/* Note: The generic .dropdown-item styles are already present in your file, 
+   but we ensure the hover and destructive color is well defined. */
+.group-chat-options-container .dropdown-item {
+  padding: 10px 15px;
+  font-size: 14px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  margin: 0 8px;
+  /* Internal margin for padding */
+  width: auto;
+}
+
+/* Styling for an icon next to the text (The i.fa in your HTML) */
+.group-chat-options-container .dropdown-item i {
+  margin-right: 12px;
+  width: 16px;
+  text-align: center;
+  color: var(--text-secondary);
+  /* Ensure icon is secondary color */
+}
+
+.group-chat-options-container .dropdown-item:hover {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.group-chat-options-container .dropdown-item:hover i {
+  color: var(--text-primary);
+  /* Icon matches text on hover */
+}
+
+/* Special Style for Destructive Actions (e.g., Leave Group) */
+.dropdown-item.destructive-action {
+  color: #ff3b30;
+  /* Bright red color for warning */
+}
+
+.dropdown-item.destructive-action:hover {
+  background: #ff3b301a;
+  /* Very light red background on hover */
+  color: #c0392b;
+  /* Darker red on hover */
+}
+
+.dropdown-item.destructive-action i {
+  color: #ff3b30;
+  /* Icon is red too */
+}
+
+.dropdown-item.destructive-action:hover i {
+  color: #c0392b;
+  /* Icon is darker red on hover */
+}
+
+
+/* =================================================================
+   NEW: FILE PROCESSING & ERROR STATES
+================================================================= */
+
+/* Style for the spinner icon */
+.file-icon.processing {
+  color: var(--accent-color);
+  /* Use accent color for the spinner */
+  border-color: transparent;
+}
+
+/* Make the file item with a processing spinner slightly faded */
+.file-item.processing .file-info,
+.file-item.processing .file-actions {
+  opacity: 0.6;
+  /* Fade out the text and controls */
+}
+
+/* Style for the error icon */
+.file-icon.failed {
+  color: var(--destructive-red);
+  /* Use red for errors */
+  border-color: transparent;
+}
+
+/* Make the whole failed item look different */
+.file-item.failed {
+  border-color: var(--destructive-red) !important;
+  /* Force red border */
+  background-color: rgba(239, 68, 68, 0.05);
+  /* Faint red background */
+}
+
+.file-item.failed:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  /* Slightly darker red on hover */
+  border-color: var(--destructive-red) !important;
+}
+
+/* Make the file name red to draw attention */
+.file-item.failed .file-name {
+  color: var(--destructive-red);
+}
+
+
+/* =================================================================
+   BACKGROUND ANIMATION CANVAS
+================================================================= */
+#bg-canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  /* Puts it behind everything */
+  pointer-events: none;
+  /* Allows you to click buttons on top of it */
+  overflow: hidden;
+  opacity: 0.6;
+  /* Keeps it subtle so text is readable */
+}
+
+
+/* Hide scrollbar globally */
+html,
+body {
+  overflow-x: hidden;
+  /* Prevent side scrolling */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
+}
+
+/* Chrome, Safari, Opera */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ensure background canvas stays fixed behind */
+#bg-canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}

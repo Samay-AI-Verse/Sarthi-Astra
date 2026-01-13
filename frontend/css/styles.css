@@ -1,0 +1,7376 @@
+:root {
+  /* --- Light Theme (Default) --- */
+  --bg-primary-light: #eee5da;
+  /* Light Almond */
+  --bg-secondary-light: #ffffff;
+  --text-primary-light: #262424;
+  /* Deep Charcoal */
+  --text-secondary-light: #716a64;
+  --border-light: #dcd3c9;
+  --accent-light: #262424;
+  --accent-hover-light: #403c3c;
+  --message-user-bg-light: #262424;
+  --message-ai-bg-light: #f3efe7;
+  --shadow-color-light: rgba(0, 0, 0, 0.1);
+  --header-bg-light: #eee5da;
+  /* --- Dark Theme --- */
+  --bg-primary-dark: #1c1c1c;
+  /* Charcoal Black */
+  --bg-secondary-dark: #2a2a2a;
+  --text-primary-dark: #ffffff;
+  --text-secondary-dark: #a9b4c2;
+  --border-dark: #383838;
+  --accent-dark: #d6efff;
+  /* Ice Blue */
+  --accent-hover-dark: #ffffff;
+  --message-user-bg-dark: #d6efff;
+  --message-ai-bg-dark: #2a2a2a;
+  --message-user-text: var(--bg-primary-dark);
+  --message-ai-text: var(--text-primary-dark);
+  --shadow-color-dark: rgba(0, 0, 0, 0.3);
+  --header-bg-dark: #1c1c1c;
+  /* --- Universal Colors --- */
+  --destructive-red: #ef4444;
+  --font-sans: "Inter", sans-serif;
+}
+
+/* =================================================================
+   2. THEME SETUP & BASE STYLES
+================================================================= */
+
+/* --- Default to Light Theme variables --- */
+body {
+  --bg-primary: var(--bg-primary-light);
+  --bg-secondary: var(--bg-secondary-light);
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+  --border-color: var(--border-light);
+  --accent-color: var(--accent-light);
+  --accent-hover: var(--accent-hover-light);
+  --accent-text: var(--bg-secondary-light);
+  --message-user-bg: var(--message-user-bg-light);
+  --message-ai-bg: var(--message-ai-bg-light);
+  --message-user-text: var(--bg-secondary-light);
+  --message-ai-text: var(--text-primary-light);
+  --shadow-color: var(--shadow-color-light);
+  --header-bg: var(--header-bg-light);
+}
+
+/* --- Switch to Dark Theme variables when .dark-mode is present --- */
+body.dark-mode {
+  --bg-primary: var(--bg-primary-dark);
+  --bg-secondary: var(--bg-secondary-dark);
+  --text-primary: var(--text-primary-dark);
+  --text-secondary: var(--text-secondary-dark);
+  --border-color: var(--border-dark);
+  --accent-color: var(--accent-dark);
+  --accent-hover: var(--accent-hover-dark);
+  --accent-text: var(--bg-primary-dark);
+  --message-user-bg: var(--message-user-bg-dark);
+  --message-ai-bg: var(--message-ai-bg-dark);
+  --message-user-text: var(--bg-primary-dark);
+  --message-ai-text: var(--text-primary-dark);
+  --shadow-color: var(--shadow-color-dark);
+  --header-bg: var(--header-bg-dark);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Playwrite US Modern", cursive;
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  height: 100vh;
+  overflow: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* =================================================================
+   3. RE-THEMED COMPONENT STYLES
+================================================================= */
+
+/* --- Header --- */
+.header {
+  background-color: var(--header-bg);
+  padding: 12px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  /* REDUCED FONT SIZE */
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Playwrite US Modern", cursive;
+}
+
+.logo-icon {
+  background: var(--accent-color);
+  color: var(--accent-text);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* --- NEW: THEME TOGGLE BUTTON --- */
+.theme-toggle-btn {
+  background: transparent;
+  border: 1px solid var(--text-primary);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.2s ease;
+  color: var(--text-primary);
+}
+
+.theme-toggle-btn:hover {
+  background-color: var(--bg-primary);
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.theme-toggle-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.moon-icon {
+  display: none;
+}
+
+body.dark-mode .sun-icon {
+  display: none;
+}
+
+body.dark-mode .moon-icon {
+  display: block;
+}
+
+.share-btn,
+.settings-btn {
+  background: transparent;
+  /* Kept original colors but reduced size */
+  border: 1px solid #262424;
+  color: #262424;
+  padding: 8px 13px;
+  /* Slightly reduced padding */
+  border-radius: 9999px;
+  cursor: pointer;
+  /* REDUCED FONT SIZE */
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.share-btn:hover,
+.settings-btn:hover {
+  background-color: #FFFFFF;
+  color: #262424;
+  border-color: #262424;
+}
+
+.share-btn svg,
+.settings-btn svg {
+  fill: currentColor;
+}
+
+.profile-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-color);
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.profile-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Main Layout --- */
+.main-container {
+  display: flex;
+  height: calc(100vh - 61px);
+  background: var(--bg-primary);
+}
+
+.sidebar,
+.chat-section,
+.studio-section {
+  background-color: var(--bg-secondary);
+  margin: 8px;
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.sidebar {
+  width: 320px;
+}
+
+.chat-section {
+  flex: 1;
+}
+
+.studio-section {
+  width: 220px;
+}
+
+.sidebar-header,
+.chat-header,
+.studio-header {
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 16px;
+  border-radius: 15px 15px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.sidebar-header {
+  padding: 10px;
+}
+
+.sidebar-header,
+.studio-header {
+  padding-bottom: 3px;
+}
+
+.sidebar-header {
+  border-bottom: none;
+}
+
+.sidebar-title,
+.chat-title,
+.studio-title {
+  /* REDUCED FONT SIZE */
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+
+
+/* --- Sidebar --- */
+.sources-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sources-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sources-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sources-content::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+.sources-content::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* In styles.css */
+
+.add-btn {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  width: 100%;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-size: 13px;
+  /* Keep reduced size */
+  font-weight: 500;
+  transition: all 0.2s ease;
+  margin-bottom: 16px;
+  margin-top: 10px;
+  /* --- ADD THESE LINES TO FIX ALIGNMENT --- */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Center icon and text */
+  gap: 6px;
+  /* Space between icon and text */
+}
+
+/* Ensure the icon has some style */
+.add-btn .btn-icon {
+  font-weight: bold;
+  /* Make the '+' slightly bolder */
+  font-size: 1.1em;
+  /* Make '+' slightly larger if needed */
+}
+
+/* --- Keep the collapsed styles as they were --- */
+.sidebar.collapsed .add-btn {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  align-self: center;
+  justify-content: center;
+}
+
+.sidebar.collapsed .btn-text {
+  display: none;
+}
+
+.add-btn:hover {
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+  border-color: var(--accent-color);
+}
+
+.sources-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+  margin-bottom: 8px;
+}
+
+.sources-header-title {
+  /* REDUCED FONT SIZE */
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+#empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+}
+
+
+
+.sources-title,
+.welcome-title {
+  /* REDUCED FONT SIZE */
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.sources-description,
+.welcome-description {
+  /* REDUCED FONT SIZE */
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.uploaded-files {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.file-item {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
+  position: relative;
+}
+
+.file-item:hover {
+  background: var(--bg-primary);
+  border-color: var(--accent-color);
+}
+
+.file-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.file-name {
+  /* REDUCED FONT SIZE */
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-size {
+  /* REDUCED FONT SIZE */
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.file-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* --- Chat Section --- */
+.chat-messages-wrapper {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+}
+
+.welcome-message {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+}
+
+.upload-btn {
+  background: var(--accent-color);
+  border: none;
+  color: var(--accent-text);
+  padding: 10px 20px;
+  /* Reduced padding */
+  border-radius: 25px;
+  cursor: pointer;
+  /* REDUCED FONT SIZE */
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.upload-btn:hover {
+  transform: translateY(-2px);
+  background: var(--accent-hover);
+}
+
+.chat-messages-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: transparent;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chat-messages::-webkit-scrollbar {
+  width: 4px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 2px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+.message {
+  max-width: 100%;
+  display: flex;
+  margin-bottom: 8px;
+  animation: messageSlideIn 0.3s ease-out;
+}
+
+@keyframes messageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message.ai {
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+
+.message-content {
+  max-width: 100%;
+  padding: 9px 13px;
+  /* Reduced padding */
+  border-radius: 20px;
+  /* REDUCED FONT SIZE */
+  font-size: 13px;
+  line-height: 1.45;
+  box-shadow: 0 1px 2px var(--shadow-color);
+  word-wrap: break-word;
+}
+
+.message.ai .message-content {
+  background: var(--message-ai-bg);
+  color: var(--message-ai-text);
+  border: 1px solid var(--border-color);
+  border-bottom-left-radius: 6px;
+}
+
+.message.user .message-content {
+  background: var(--message-user-bg);
+  color: var(--message-user-text);
+  border-bottom-right-radius: 6px;
+}
+
+/* Chat Input Section */
+.chat-input-section {
+  flex-shrink: 0;
+}
+
+.chat-input-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  background: var(--bg-primary);
+  border-radius: 25px;
+  padding: 10px 14px;
+  /* Reduced padding */
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.chat-input-container:focus-within {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px var(--accent-color-trans, rgba(38, 36, 36, 0.1));
+}
+
+body.dark-mode .chat-input-container:focus-within {
+  --accent-color-trans: rgba(214, 239, 255, 0.2);
+}
+
+.chat-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  /* REDUCED FONT SIZE */
+  font-size: 13px;
+  line-height: 1.4;
+  resize: none;
+  max-height: 120px;
+  outline: none;
+}
+
+.chat-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.send-btn {
+  background: var(--accent-color);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-text);
+  font-size: 16px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.send-btn:hover:not(:disabled) {
+  transform: scale(1.05);
+  background: var(--accent-hover);
+}
+
+.send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* --- Studio Section --- */
+.studio-tools {
+  display: grid;
+  grid-template-columns: 1fr;
+  /* This creates one vertical column */
+  gap: 12px;
+  /* padding: 20px 20px; */
+}
+
+.tool-card {
+  background: var(--bg-primary);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
+  /* The aspect-ratio line is removed */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  /* Re-add padding for proper spacing */
+}
+
+.tool-card:hover {
+  background: var(--bg-secondary);
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.tool-icon {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+  /* Use the theme variable */
+}
+
+.tool-name {
+  /* REDUCED FONT SIZE */
+  font-size: 13px;
+  color: var(--text-primary);
+  /* Change this line */
+  font-weight: 500;
+}
+
+.studio-footer {
+  text-align: center;
+  flex-shrink: 0;
+  margin-bottom: 20px;
+}
+
+.add-note-btn {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  /* REDUCED FONT SIZE */
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 auto;
+  transition: all 0.2s ease;
+}
+
+.add-note-btn:hover {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--accent-text);
+}
+
+/* --- Modals --- */
+.hidden {
+  display: none !important;
+}
+
+#fileInput {
+  display: none;
+}
+
+.drag-over {
+  border: 2px dashed var(--accent-color) !important;
+  background-color: var(--bg-primary) !important;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.modal-overlay:not(.hidden) {
+  display: flex;
+}
+
+.modal {
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90%;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 32px var(--shadow-color);
+}
+
+.modal-header {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-title-section {
+  flex: 1;
+}
+
+.modal-title {
+  /* REDUCED FONT SIZE */
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.modal-subtitle {
+  /* REDUCED FONT SIZE */
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  color: var(--text-primary);
+}
+
+.modal-content {
+  padding: 24px;
+  max-height: calc(90vh - 120px);
+  overflow-y: auto;
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 5px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background-color: var(--text-secondary);
+}
+
+.upload-zone {
+  border: 2px dashed var(--border-color);
+  border-radius: 12px;
+  padding: 48px 24px;
+  text-align: center;
+  margin-bottom: 24px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  background: var(--bg-primary);
+}
+
+.upload-zone:hover,
+.upload-zone.drag-over {
+  border-color: var(--accent-color);
+  background: var(--bg-secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px var(--shadow-color);
+}
+
+.upload-zone-icon {
+  width: 56px;
+  height: 56px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px auto;
+  color: var(--accent-text);
+  font-size: 24px;
+}
+
+.upload-zone-title {
+  /* REDUCED FONT SIZE */
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.upload-zone-subtitle {
+  /* REDUCED FONT SIZE */
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.choose-file-link {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.supported-types {
+  /* REDUCED FONT SIZE */
+  font-size: 11px;
+  color: var(--text-secondary);
+  background: var(--bg-primary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.source-options-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.source-option {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.source-option:hover {
+  background: var(--bg-secondary);
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.source-option-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.source-option-title {
+  /* REDUCED FONT SIZE */
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.source-limit-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--bg-primary);
+  border-top: 1px solid var(--border-color);
+}
+
+.source-limit-text {
+  /* REDUCED FONT SIZE */
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.progress-bar {
+  height: 4px;
+  background: var(--border-color);
+  border-radius: 2px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent-color);
+  width: 0%;
+  border-radius: 2px;
+}
+
+.source-limit-count {
+  /* REDUCED FONT SIZE */
+  font-size: 11px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* --- UI Elements: Checkboxes, Menus, Icons --- */
+.checkbox-wrapper-31 {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+
+.checkbox-wrapper-31 .background {
+  fill: var(--bg-primary);
+  stroke: var(--border-color);
+  stroke-width: 1px;
+  transition: ease all 0.2s;
+}
+
+.checkbox-wrapper-31 .stroke,
+.checkbox-wrapper-31 .check {
+  fill: none;
+  stroke: var(--accent-text);
+  stroke-width: 2.5px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10;
+  stroke-dashoffset: 100;
+  stroke-dasharray: 100;
+  transition: ease all 0.4s;
+}
+
+.checkbox-wrapper-31 input[type="checkbox"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox-wrapper-31 input[type="checkbox"]:checked+svg .background,
+.checkbox-wrapper-31 input[type="checkbox"]:indeterminate+svg .background {
+  fill: var(--accent-color);
+  stroke: var(--accent-color);
+}
+
+.checkbox-wrapper-31 input[type="checkbox"]:checked+svg .check {
+  stroke-dashoffset: 0;
+}
+
+.checkbox-wrapper-31 input[type="checkbox"]:indeterminate+svg .check {
+  stroke-dashoffset: 18;
+  stroke-dasharray: 22;
+}
+
+.file-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* REDUCED FONT SIZE */
+  font-size: 18px;
+  flex-shrink: 0;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.file-icon.pdf {
+  border-color: transparent;
+  color: #d32f2f;
+}
+
+.file-icon.image {
+  border-color: transparent;
+  color: #3e6ec6;
+}
+
+.file-icon.word {
+  border-color: transparent;
+  color: #023165;
+}
+
+.file-icon.audio {
+  border-color: transparent;
+  color: #ef6c00;
+}
+
+.file-menu-container {
+  position: relative;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  /* REDUCED FONT SIZE */
+  font-size: 14px;
+  padding: 6px;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.menu-btn:hover {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  /* INCREASED WIDTH */
+  width: 180px;
+  background: var(--bg-secondary);
+  backdrop-filter: blur(8px);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 16px var(--shadow-color);
+  z-index: 20;
+  padding: 6px;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  visibility: visible;
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+
+.dropdown-menu.hidden {
+  opacity: 0;
+  transform: translateY(-5px) scale(0.95);
+  visibility: hidden;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  color: var(--text-primary);
+  text-decoration: none;
+  /* REDUCED FONT SIZE */
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item i.fas {
+  width: 16px;
+  text-align: center;
+}
+
+.dropdown-item:hover {
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+}
+
+.dropdown-item.delete-dropdown-btn:hover {
+  background-color: var(--destructive-red);
+  color: #ffffff;
+}
+
+.rename-input {
+  width: 100%;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--accent-color);
+  border-radius: 4px;
+  color: var(--text-primary);
+  /* REDUCED FONT SIZE */
+  font-size: 13px;
+  padding: 2px 6px;
+}
+
+.rename-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-color-trans, rgba(38, 36, 36, 0.1));
+}
+
+/* In index.css, replace the old sidebar styles with this definitive version */
+
+.main-container {
+  display: flex;
+  height: calc(100vh - 68px);
+  /* Adjust if header height is different */
+}
+
+/* Make the main content wrapper a flex column that fills the sidebar */
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Make the sources section grow to fill the space below the main "Sources" title */
+.sources-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 8px;
+  min-height: 0;
+  padding-top: 15px;
+  /* Prevents flexbox from overflowing on smaller screens */
+}
+
+/* Make the file list itself the part that grows and scrolls */
+#uploaded-files {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 8px 16px 8px;
+  padding-top: 1px;
+}
+
+/* --- Hide the scrollbar while keeping functionality --- */
+
+/* This rule works for modern browsers like Firefox */
+#uploaded-files {
+  scrollbar-width: none;
+  /* For Firefox */
+  -ms-overflow-style: none;
+  /* For Internet Explorer and Edge */
+}
+
+/* This rule works for Chrome, Safari, and other WebKit-based browsers */
+#uploaded-files::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+/* =================================================================
+   NEW: SIDEBAR COLLAPSE STYLES
+================================================================= */
+
+/* --- Add a smooth transition to the sidebar --- */
+.sidebar {
+  width: 320px;
+  transition: width 0.3s ease-in-out;
+}
+
+/* --- Style for the new toggle button --- */
+.sidebar-toggle-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.sidebar-toggle-btn:hover {
+  background-color: var(--bg-primary);
+  color: var(--accent-color);
+}
+
+.sidebar-toggle-btn svg {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* --- THIS IS THE MAGIC: STYLES FOR THE COLLAPSED STATE --- */
+
+/* 1. Shrink the sidebar */
+.sidebar.collapsed {
+  width: 80px;
+  /* New, smaller width */
+}
+
+/* 2. Rotate the toggle button icon */
+.sidebar.collapsed .sidebar-toggle-btn svg {
+  transform: rotate(180deg);
+}
+
+/* 3. Hide text and other elements that won't fit */
+.sidebar.collapsed .sidebar-title,
+.sidebar.collapsed .btn-text,
+.sidebar.collapsed .sources-header-title,
+.sidebar.collapsed .file-name,
+.sidebar.collapsed .file-size,
+.sidebar.collapsed #empty-state {
+  display: none;
+}
+
+/* 4. Center the remaining elements */
+.sidebar.collapsed .add-btn {
+  justify-content: center;
+}
+
+.sidebar.collapsed .sources-header {
+  display: none;
+}
+
+.sidebar.collapsed .file-info {
+  display: none;
+  /* Hide the file-name and file-size container */
+}
+
+.sidebar.collapsed .file-actions {
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* NEW: When sidebar is collapsed, position the toggle button better */
+.sidebar.collapsed .sidebar-header {
+  justify-content: center;
+  /* Center the single icon */
+  padding: 16px 0;
+  /* Adjust padding to look more balanced */
+}
+
+/* Further adjust if the header-left div is still present and affecting layout */
+.sidebar.collapsed .header-left {
+  display: none;
+  /* Hide the title container completely */
+}
+
+
+
+.sidebar.collapsed .add-btn {
+  width: 44px;
+  /* Set a fixed width */
+  height: 44px;
+  /* Set a fixed height to make it a circle */
+  padding: 0;
+  /* Remove padding to center the icon */
+  align-self: center;
+  /* Center the button itself in the sidebar */
+  justify-content: center;
+}
+
+.sidebar.collapsed .uploaded-files {
+  gap: 4px;
+  /* Reduces space between file items from 8px to 4px */
+}
+
+/* Shrink the menu button (ellipsis) */
+.sidebar.collapsed .menu-btn {
+  width: 24px;
+  height: 24px;
+  /* REDUCED FONT SIZE */
+  font-size: 14px;
+}
+
+/* Shrink the checkbox */
+.sidebar.collapsed .checkbox-wrapper-31 {
+  width: 18px;
+  height: 18px;
+}
+
+/* Studio section expanded animation styles  */
+
+/* =================================================================
+   NEW: STUDIO COLLAPSE STYLES
+================================================================= */
+
+/* --- Add a smooth transition to the studio section --- */
+.studio-section {
+  transition: width 0.3s ease-in-out;
+}
+
+/* --- Ensure the header items are spaced correctly --- */
+.studio-header {
+  justify-content: space-between;
+}
+
+/* --- Style for the new toggle button --- */
+.studio-toggle-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.studio-toggle-btn:hover {
+  background-color: var(--bg-primary);
+  color: var(--accent-color);
+}
+
+.studio-toggle-btn svg {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* --- STYLES FOR THE COLLAPSED STATE --- */
+
+/* 1. Shrink the studio section */
+.studio-section.collapsed {
+  width: 80px;
+}
+
+/* 2. Rotate the toggle button icon */
+.studio-section.collapsed .studio-toggle-btn svg {
+  transform: rotate(180deg);
+}
+
+/* 3. Hide text elements */
+.studio-section.collapsed .studio-title,
+.studio-section.collapsed .tool-name,
+.studio-section.collapsed .studio-footer {
+  display: none;
+}
+
+/* 4. Center the remaining header content (the button) */
+.studio-section.collapsed .studio-header {
+  justify-content: center;
+}
+
+/* 5. Adjust padding for the tool cards to keep them centered */
+.studio-section.collapsed .studio-tools {
+  /* padding: 16px 8px;  */
+  grid-template-columns: 1fr;
+  /* This creates the single vertical line */
+  gap: 8px;
+  /* Reduces space between the vertical icons */
+}
+
+
+
+.studio-section.collapsed .tool-card {
+  padding: 5px;
+  /* Makes the card more compact */
+}
+
+.studio-section.collapsed .tool-icon {
+  font-size: 20px;
+  /* Makes the icon like 🎵, 🎬, etc. smaller */
+  margin-bottom: 4px;
+  /* Reduces the space below the icon */
+}
+
+
+.studio-section.collapsed .studio-title,
+.studio-section.collapsed .tool-name {
+  display: none;
+}
+
+/* Style the footer in the collapsed view */
+.studio-section.collapsed .studio-footer {
+  padding: 16px 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* Transform the button into a circle */
+/* Transform the button into a circle and match its style to other icons */
+.studio-section.collapsed .add-note-btn {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--bg-primary);
+  /* Add this to match the card background */
+  border: 1px solid var(--border-color);
+  /* Add this for a consistent border */
+  display: flex;
+  /* Add these three lines */
+  align-items: center;
+  /* to perfectly center */
+  justify-content: center;
+  /* the pencil icon */
+}
+
+/* Hide the button's text */
+.studio-section.collapsed .add-note-btn .btn-text {
+  display: none;
+}
+
+/* --- Dark Mode overrides for Share/Settings Buttons --- */
+
+/* Default style in Dark Mode */
+body.dark-mode .share-btn,
+body.dark-mode .settings-btn {
+  color: var(--text-secondary-dark);
+  /* Light grey text */
+  border-color: var(--border-dark);
+  /* Subtle dark border */
+}
+
+/* Hover style in Dark Mode */
+body.dark-mode .share-btn:hover,
+body.dark-mode .settings-btn:hover {
+  background-color: var(--bg-secondary-dark);
+  /* Dark grey background */
+  color: var(--text-primary-dark);
+  /* Bright white text */
+  border-color: var(--text-secondary-dark);
+  /* Light grey border */
+}
+
+
+
+/* Add this block to your styles.css */
+/* Ensure the logo images fit their container */
+.logo-icon .logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Use 'contain' to ensure the whole logo is visible */
+  transition: opacity 0.3s ease;
+}
+
+/* By default (Light Mode), hide the dark logo and show the light logo */
+.logo-icon .light-logo {
+  display: block;
+}
+
+.logo-icon .dark-logo {
+  display: none;
+}
+
+/* In Dark Mode, hide the light logo and show the dark logo */
+body.dark-mode .logo-icon .light-logo {
+  display: none;
+}
+
+body.dark-mode .logo-icon .dark-logo {
+  display: block;
+}
+
+
+/* You should also update the original .logo-icon style to remove the background/text that was used for the '📓' placeholder */
+.logo-icon {
+  /* Existing styles from styles.css: */
+  /* background: var(--accent-color); */
+  /* color: var(--accent-text); */
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 5px;
+
+  /* REVISIONS: Remove the background and text color to let the image show through cleanly. */
+  background: none;
+  color: transparent;
+  /* Or simply omit the color property if it doesn't cause issues */
+}
+
+
+/* In styles.css (Section 3. RE-THEMED COMPONENT STYLES) */
+
+
+
+/* New expanded style is start here  */
+
+
+
+/* NEW: Utility class for hidden elements */
+.hidden {
+  display: none !important;
+}
+
+/* Update .tool-card for clickable feel and transitions */
+.tool-card {
+  /* Existing styles... */
+  cursor: pointer;
+  /* NEW: Make it look clickable */
+  transition: all 0.3s ease;
+  /* NEW: Smooth expand/collapse */
+  overflow: hidden;
+  /* NEW: Prevent content overflow during animation */
+}
+
+/* NEW: Expanded state styles */
+.tool-card.expanded {
+  width: 100%;
+  /* Full width in the container */
+  background-color: var(--bg-primary);
+  /* Slight design change (e.g., lighter/darker bg) */
+  border-radius: 8px;
+  /* Rounded for expanded view */
+  box-shadow: 0 4px 12px var(--shadow-color);
+  /* Add shadow for depth */
+  padding: 16px;
+  /* More padding when expanded */
+}
+
+/* NEW: Content reveal in expanded state */
+.tool-card .tool-content {
+  max-height: 0;
+  /* Initially collapsed */
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+  padding: 0 16px;
+  color: var(--text-primary);
+  /* REDUCED FONT SIZE */
+  font-size: 13px;
+}
+
+.tool-card.expanded .tool-content {
+  display: block;
+  /* Override hidden if needed */
+  max-height: 500px;
+  /* Adjust based on content; or use 'none' for auto */
+  opacity: 1;
+  padding: 16px;
+  /* Padding when visible */
+}
+
+
+
+.tool-card.expanded::after {
+  transform: translateY(-50%) rotate(180deg);
+  /* Rotate arrow up when expanded */
+}
+
+/* Ensure .studio-tools can handle expansions */
+.studio-tools {
+  /* Existing styles... */
+  display: flex;
+  flex-direction: column;
+  /* Stack vertically for accordion feel */
+  gap: 8px;
+  /* Space between cards */
+}
+
+/* Dark mode adjustments (if needed) */
+body.dark-mode .tool-card.expanded {
+  background-color: var(--bg-secondary-dark);
+  /* Override for dark theme */
+}
+
+
+/* Existing .studio-section styles */
+.studio-section {
+  width: 220px;
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
+/* Expanded state for full panel */
+.studio-section.expanded {
+  width: 400px;
+  /* Adjustable; can be flex: 1 to match chat section */
+  height: calc(100vh - 61px - 16px);
+  /* Full height minus header and margin */
+  position: relative;
+  overflow: auto;
+}
+
+/* Hide other tools when expanded */
+.studio-section.expanded .tool-card {
+  display: none;
+}
+
+/* Style for the expanded details */
+.tool-details {
+  display: none;
+}
+
+.tool-details.hidden {
+  display: none !important;
+}
+
+.studio-section.expanded .tool-details {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 16px;
+  background-color: var(--bg-secondary);
+  border-radius: 0 15px 15px 0;
+}
+
+.tool-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tool-details-title {
+  color: var(--text-primary);
+  /* REDUCED FONT SIZE */
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.close-details-btn {
+  background: transparent;
+  border: none;
+  /* REDUCED FONT SIZE */
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 4px;
+}
+
+.close-details-btn:hover {
+  color: var(--accent-color);
+}
+
+.tool-details-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+/* Ensure .studio-tools adjusts */
+.studio-tools {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  overflow: hidden;
+}
+
+/* Dark mode adjustments */
+body.dark-mode .studio-section.expanded .tool-details {
+  background-color: var(--bg-secondary-dark);
+}
+
+/* Optional: Adjust footer visibility */
+.studio-section.expanded .studio-footer {
+  display: none;
+  /* Hide footer when expanded, if desired */
+}
+
+
+/* Existing .main-container styles */
+.main-container {
+  display: flex;
+  height: calc(100vh - 61px);
+  /* Existing height calculation */
+  background: var(--bg-primary);
+  /* NEW: Move up by 15px (adjustable between 10-20px) */
+  margin-top: -10px;
+  /* Negative margin to pull it up */
+}
+
+/* Ensure the header doesn't overlap or shift unexpectedly */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  max-height: 70px;
+}
+
+.sidebar,
+.chat-section,
+.studio-section {
+  /* Reduced border radius for a slightly tighter look */
+  border-radius: 15px 15px 15px 15px;
+  overflow: hidden;
+  /* Ensure content respects the curve */
+}
+
+.tool-view {
+  flex: 1;
+  /* Allows the view to take up vertical space */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Styles for simple text inside tool views */
+.tool-info-text {
+  /* REDUCED FONT SIZE */
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+/* Styles for placeholders (charts, maps) */
+.tool-content-placeholder {
+  height: 200px;
+  background: var(--bg-primary);
+  margin-top: 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  /* REDUCED FONT SIZE */
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+/* Styles for list-based content (IntelliAlert) */
+.alert-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 15px 0;
+  color: var(--text-primary);
+}
+
+.alert-list li {
+  background: var(--bg-primary);
+  padding: 9px;
+  /* Reduced padding */
+  border-radius: 6px;
+  margin-bottom: 8px;
+  /* REDUCED FONT SIZE */
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.alert-list li i.fas {
+  color: var(--destructive-red);
+}
+
+/* Secondary Button Style */
+.secondary-action-btn {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border-radius: 50px;
+  cursor: pointer;
+  /* REDUCED FONT SIZE */
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+  /* Keeps the button aligned left */
+}
+
+.secondary-action-btn:hover {
+  background: var(--accent-color);
+  color: var(--accent-text);
+  border-color: var(--accent-color);
+}
+
+
+/* =================================================================
+   NEW: STUDIO HEADER TRANSFORMATION STYLES
+================================================================= */
+
+/* 1. Hide the original Studio header when the panel is expanded */
+.studio-section.expanded .studio-header {
+  display: none;
+}
+
+/* 2. Hide the Studio footer (Add Note button) when expanded */
+.studio-section.expanded .studio-footer {
+  display: none;
+}
+
+/* 3. Style the tool details header to look like the main section header */
+.tool-details-wrapper .tool-details-header {
+  /* Mimic the studio-header padding/border */
+  border-bottom: 1px solid var(--border-color);
+  /* Reduced vertical padding to align with other section headers */
+  padding: 1px 10px 10px 10px;
+  /* Reset border-radius to 0 0 0 0 because the main studio-section
+      already handles the top-left/top-right rounding (30px).
+    */
+  border-radius: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+
+  /* Reset background to match the top curve */
+  background-color: var(--bg-secondary);
+}
+
+
+/* Tool Title Font Size Adjustment */
+.tool-details-wrapper .tool-details-title {
+  /* Match the size of the .studio-title or .chat-title */
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Close Button Padding Adjustment */
+.tool-details-wrapper .close-details-btn {
+  padding: 4px;
+  /* Ensure button area is small */
+  font-size: 20px;
+}
+
+
+
+/* Ensure the icon is centered and scaled correctly within the button */
+.tool-details-wrapper .close-details-btn {
+  /* Keep existing button styles */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  /* Ensure a good click target */
+  font-size: 20px;
+}
+
+.tool-details-wrapper .close-details-btn i {
+  /* Reduce the size of the icon slightly so it doesn't look too big */
+  font-size: 16px;
+}
+
+.loading-spinner {
+  padding: 20px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+
+/* Context menu styles (ensure consistency) */
+.context-menu {
+  position: absolute;
+  background: var(--background-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  min-width: 150px;
+}
+
+.context-menu-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  /* REDUCED FONT SIZE */
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.context-menu-item:hover {
+  background: var(--background-hover);
+}
+
+.context-menu-item.open::before {
+  content: "📂 ";
+  /* Icon for Open */
+}
+
+.context-menu-item.summary::before {
+  content: "📝 ";
+  /* Icon for Get Summary */
+}
+
+.context-menu-item.rename::before {
+  content: "✏️ ";
+  /* Icon for Rename */
+}
+
+.context-menu-item.delete::before {
+  content: "🗑️ ";
+  /* Icon for Delete */
+}
+
+
+/* In styles.css */
+
+/* --- 1. Increase Dropdown Menu Width --- */
+.dropdown-menu {
+  /* Existing styles are fine, just overriding the width */
+  width: 180px;
+  /* Increased from 140px */
+}
+
+/* --- 2. NEW: Styles for the File Viewer Modal --- */
+.file-viewer-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  /* Higher than the upload modal */
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.file-viewer-modal-overlay:not(.hidden) {
+  opacity: 1;
+  visibility: visible;
+}
+
+.file-viewer-modal {
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  width: 90%;
+  height: 90%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px var(--shadow-color);
+  border: 1px solid var(--border-color);
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+.file-viewer-modal-overlay:not(.hidden) .file-viewer-modal {
+  transform: scale(1);
+}
+
+.file-viewer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.file-viewer-title {
+  /* REDUCED FONT SIZE */
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-viewer-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 5px;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.file-viewer-close-btn:hover {
+  color: var(--text-primary);
+}
+
+.file-viewer-content {
+  flex: 1;
+  padding: 16px;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style for embedded content to fill the container */
+.file-viewer-content img,
+.file-viewer-content embed {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  /* Ensures images are scaled correctly */
+  border-radius: 8px;
+}
+
+.file-viewer-content embed {
+  width: 100%;
+  height: 100%;
+}
+
+/* Fallback style for unsupported files */
+.unsupported-file-view {
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.unsupported-file-view h4 {
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.unsupported-file-view a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* In styles.css */
+
+/* --- Style for the new "Get Summary" button in the viewer header --- */
+.action-btn-header {
+  background: var(--accent-color);
+  color: var(--accent-text);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 15px;
+  /* REDUCED FONT SIZE */
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  margin-right: 15px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.action-btn-header:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.action-btn-header.hidden {
+  display: none !important;
+}
+
+/* =================================================================
+   HEADER DROPDOWN MENUS
+================================================================= */
+.header-menu-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* This targets the dropdowns in the header specifically */
+.header-menu-container .dropdown-menu {
+  top: calc(100% + 10px);
+  /* Position it below the button with a small gap */
+}
+
+/* Add a divider style if it doesn't exist */
+.dropdown-divider {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 4px 0;
+}
+
+
+/* =================================================================
+   NEW: DETAILED PROFILE POPUP STYLES
+================================================================= */
+.profile-popup-container {
+  width: 320px;
+  /* Wider than a standard dropdown */
+  padding: 0;
+  /* Remove default padding to allow for sections */
+  border-radius: 16px;
+  /* Softer, modern corners */
+}
+
+.profile-popup-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.profile-popup-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.profile-popup-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-popup-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-popup-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.profile-popup-email {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.manage-account-btn {
+  display: block;
+  margin: 0 20px 20px 20px;
+  padding: 8px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  text-align: center;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.manage-account-btn:hover {
+  background-color: var(--bg-primary);
+}
+
+.profile-popup-section {
+  padding: 8px;
+  /* Add padding around the action items */
+}
+
+/* Ensure icons in the new popup are styled correctly */
+.profile-popup-section .dropdown-item i.fas {
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.profile-popup-section .dropdown-item:hover i.fas {
+  color: var(--accent-text);
+}
+
+
+
+/* =================================================================
+   NEW: PREFERENCES MODAL STYLES
+================================================================= */
+.preference-section {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.preference-section:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.preference-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.preference-description {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.preference-select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 14px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23716a64' class='bi bi-chevron-down' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+}
+
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+
+/* =================================================================
+   TeamSpaces Chat Styles for Document Page
+================================================================= */
+
+/* Main container for the TeamSpaces tool */
+#sarthiChatStudioView {
+  padding: 0;
+  overflow: hidden;
+  /* Important for containing the chat UI */
+  position: relative;
+  /* Crucial for positioning the '+' button */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Friend list and chat view containers */
+#doc-panel-main-content,
+#doc-panel-chat-view {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#doc-panel-main-content .search-container {
+  padding: 10px;
+}
+
+.panel-search-input {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 14px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 25px;
+  outline: none;
+}
+
+/* Friend list */
+#doc-friend-list-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+#doc-friend-list-container::-webkit-scrollbar {
+  display: none;
+}
+
+.friend-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  position: relative;
+}
+
+.friend-item:hover {
+  background-color: var(--bg-primary);
+}
+
+.friend-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.friend-item .name {
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.unread-dot {
+  position: absolute;
+  right: 45px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  background-color: #007aff;
+  border-radius: 50%;
+  border: 2px solid var(--bg-secondary);
+}
+
+/* Chat view */
+.chat-header-panel {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.back-btn-panel {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-right: 8px;
+}
+
+.back-btn-panel i {
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+#doc-chat-friend-pic {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+#doc-chat-friend-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.chat-messages-panel {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message-bubble {
+  max-width: 75%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 14px;
+  word-wrap: break-word;
+}
+
+.message-bubble.sent {
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.message-bubble.received {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+/* Input panel */
+.chat-input-form-panel {
+  display: flex;
+  padding: 12px;
+  border-top: 1px solid var(--border-color);
+  gap: 10px;
+}
+
+.chat-input-form-panel input {
+  flex-grow: 1;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  padding: 10px 16px;
+  outline: none;
+  color: var(--text-primary);
+}
+
+.chat-input-form-panel button {
+  border-radius: 20px;
+  border: none;
+  background: var(--accent-color);
+  color: var(--accent-text);
+  font-weight: 600;
+  padding: 0 16px;
+  cursor: pointer;
+}
+
+/* Floating Action Button (FAB) */
+.add-friend-fab {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  z-index: 10;
+  transition: all 0.2s ease;
+  margin-left: 20px;
+}
+
+.fab-menu {
+  position: absolute;
+  right: 16px;
+  bottom: 80px;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-end;
+  opacity: 0;
+  transform: translateY(15px);
+  pointer-events: none;
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.fab-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.fab-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.fab-menu-item span {
+  background-color: var(--bg-secondary);
+  padding: 6px 12px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.fab-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+#doc-fab-main-btn.active i::before {
+  content: "\f00d";
+  font-family: 'FontAwesome';
+}
+
+/* Add Friend Modal */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.search-result-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.search-result-info .name {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.search-result-info .email {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.add-friend-btn {
+  margin-left: auto;
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 20px;
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+  border: none;
+  cursor: pointer;
+}
+
+/* =================================================================
+   FIX: Sarthi Chat Layout, Scrolling & Button Placement
+================================================================= */
+
+/* 1. Make the main chat tool container a flexbox and position context */
+#sarthiChatStudioView {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  /* Ensures it fills the parent container */
+  overflow: hidden;
+  position: relative;
+  /* This is essential for positioning the '+' button */
+}
+
+/* 2. Fix the Friend List view layout */
+#doc-panel-main-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
+  /* A key flexbox fix to enable scrolling */
+}
+
+#doc-friend-list-container {
+  flex-grow: 1;
+  /* Allows the list to take up all available space */
+  overflow-y: auto;
+  /* Makes ONLY the friend list scrollable */
+}
+
+/* 3. Fix the active Chatting view layout */
+#doc-panel-chat-view {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
+  /* A key flexbox fix to enable scrolling */
+}
+
+.chat-messages-panel {
+  flex-grow: 1;
+  /* Makes the message area grow to fill all available space */
+  overflow-y: auto;
+  /* Makes ONLY the messages scrollable */
+}
+
+.chat-input-form-panel {
+  flex-shrink: 0;
+  /* Prevents the input form from shrinking, keeping it at the bottom */
+}
+
+/* 4. Correctly position the FAB ('+' button) */
+.add-friend-fab {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10;
+}
+
+
+/* =================================================================
+   FIX: Workspace Panel Expansion & Sarthi Chat Layout
+================================================================= */
+
+/* 1. Make the expanded workspace a flex container */
+.studio-section.expanded {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 2. Force the tool wrapper to grow and fill the expanded panel */
+.studio-section.expanded #toolDetailsWrapper {
+  flex-grow: 1;
+  /* This makes it take up all available vertical space */
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  /* A crucial fix for nested flexbox scrolling */
+}
+
+/* 3. Force the content area to grow as well */
+#toolDetailsContent {
+  flex-grow: 1;
+  display: flex;
+  /* This is new */
+  flex-direction: column;
+  /* This is new */
+  min-height: 0;
+  overflow: hidden;
+  /* Prevent this container from scrolling */
+}
+
+/* 4. Ensure Sarthi Chat fills the content area */
+#sarthiChatStudioView {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  /* Anchor for the '+' button */
+}
+
+/* 5. Ensure the inner components scroll correctly */
+#doc-panel-main-content,
+#doc-panel-chat-view {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
+}
+
+#doc-friend-list-container,
+.chat-messages-panel {
+  flex-grow: 1;
+  overflow-y: auto;
+  /* This makes ONLY the content scroll */
+}
+
+.chat-input-form-panel {
+  flex-shrink: 0;
+  /* Keep the input bar at the bottom */
+}
+
+/* 6. Correctly position the FAB ('+' button) */
+.add-friend-fab {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10;
+}
+
+
+
+.chat-header-panel {
+  padding: 15px 16px;
+}
+
+/* =================================================================
+   FIX: Merged Sarthi Chat Header
+================================================================= */
+
+.tool-details-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-group {
+  flex-grow: 1;
+  /* Allows the title to take up space */
+  min-width: 0;
+}
+
+.header-group.in-chat {
+  display: flex;
+  align-items: center;
+}
+
+.header-group.in-chat .back-btn-panel {
+  margin-right: 8px;
+  /* Space between back arrow and image */
+  padding: 4px;
+}
+
+.header-group.in-chat img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.header-group.in-chat h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  /* Prevent long names from breaking layout */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* =================================================================
+   FIX: Remove Horizontal Padding from Sarthi Chat Panel
+================================================================= */
+
+/* This targets all the main content areas inside the expanded
+   chat panel and removes their left and right padding. */
+
+.studio-section.expanded .search-container,
+.studio-section.expanded #doc-friend-list-container,
+.studio-section.expanded .chat-messages-panel,
+.studio-section.expanded .chat-input-form-panel {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#doc-header-chat {}
+
+#doc-chat-friend-pic {
+  width: 30px;
+  height: 30px;
+}
+
+
+/* =================================================================
+   FIX: Hide Scrollbars in Sarthi Chat
+================================================================= */
+
+/* This targets the chat message area */
+.chat-messages-panel::-webkit-scrollbar {
+  display: none;
+  /* For Chrome, Safari, and Opera */
+}
+
+.chat-messages-panel {
+  -ms-overflow-style: none;
+  /* For Internet Explorer and Edge */
+  scrollbar-width: none;
+  /* For Firefox */
+}
+
+/* This targets the friend list area */
+#doc-friend-list-container::-webkit-scrollbar {
+  display: none;
+  /* For Chrome, Safari, and Opera */
+}
+
+#doc-friend-list-container {
+  -ms-overflow-style: none;
+  /* For Internet Explorer and Edge */
+  scrollbar-width: none;
+  /* For Firefox */
+}
+
+
+
+
+/* =================================================================
+   IMPROVEMENT: Sarthi Chat List Styles
+================================================================= */
+
+/* This styles the "Groups" and "Friends" headers */
+#sarthiChatStudioView .chat-list-section-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 16px 12px 8px 12px;
+  /* Adds more space above the header */
+  text-transform: uppercase;
+  /* Makes it look cleaner */
+  letter-spacing: 0.05em;
+  /* Spreads letters out slightly */
+}
+
+/* This styles the individual friend or group item */
+#sarthiChatStudioView .friend-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  /* Consistent padding */
+  border-radius: 8px;
+  /* Softer corners */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin: 0 8px;
+  /* Adds a small margin to inset the items */
+}
+
+#sarthiChatStudioView .friend-item:hover {
+  background-color: var(--bg-primary);
+  /* Theme-aware hover */
+}
+
+/* This styles the circular icon (e.g., "H" or profile pic) */
+#sarthiChatStudioView .friend-item img,
+#sarthiChatStudioView .friend-item .profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+  flex-shrink: 0;
+  /* Prevents icon from squishing */
+  object-fit: cover;
+}
+
+/* This styles the name text itself */
+#sarthiChatStudioView .friend-item .name {
+  font-size: 14px;
+  font-weight: 600;
+  /* Bolder name */
+  color: var(--text-primary);
+  white-space: nowrap;
+  /* Prevents name from wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* Adds "..." if the name is too long */
+}
+
+/* This styles the friend profile pictures */
+#sarthiChatStudioView .friend-item img {
+  width: 32px;
+  /* New smaller size */
+  height: 32px;
+  /* New smaller size */
+  border-radius: 50%;
+  margin-right: 12px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+/* This styles the group icons (e.g., "H") */
+#sarthiChatStudioView .friend-item .profile-icon {
+  /* Sizing */
+  width: 32px;
+  /* New smaller size */
+  height: 32px;
+  /* New smaller size */
+  font-size: 14px;
+  /* Smaller font for smaller circle */
+
+  /* Centering */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Styling (from the old inline style) */
+  background-color: var(--border-color);
+  color: var(--text-primary);
+  font-weight: 600;
+  border-radius: 50%;
+
+  /* Layout (from the old inline style) */
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+/* =================================================================
+   DROPDOWN MENU STYLES (Both Header and Group Options)
+================================================================= */
+
+/* --- Container for positioning --- */
+.header-menu-container,
+.group-chat-options-container {
+  position: relative;
+  /* Needed for absolute positioning of the dropdown */
+}
+
+/* --- General Dropdown Styling --- */
+.dropdown-menu {
+  /* Positioning */
+  position: absolute;
+  top: calc(100% + 10px);
+  /* Position below the button with a gap */
+  right: 0;
+  z-index: 1001;
+  /* Ensure it's above most other elements */
+
+  /* Appearance */
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  /* Softer corners */
+  box-shadow: 0 8px 24px var(--shadow-color);
+  /* Consistent shadow */
+  min-width: 200px;
+  /* Minimum width */
+  padding: 8px;
+  /* Padding around the items */
+  list-style: none;
+  /* Remove default list bullets if it's a <ul> */
+  margin: 0;
+
+  /* Visibility & Animation */
+  opacity: 1;
+  /* Default to visible */
+  transform: translateY(0) scale(1);
+  visibility: visible;
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+
+/* --- Hidden State --- */
+.dropdown-menu.hidden {
+  opacity: 0;
+  transform: translateY(-5px) scale(0.95);
+  visibility: hidden;
+  pointer-events: none;
+  /* Prevent clicks when hidden */
+}
+
+/* --- Dropdown Items --- */
+/* Style for both <a> and <button> elements inside the dropdown */
+.dropdown-menu .dropdown-item {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* Space between icon and text */
+  width: 100%;
+  /* Make items fill the dropdown width */
+  padding: 10px 12px;
+  /* Padding inside the item */
+  margin: 0;
+  /* Reset default margins */
+
+  /* Text & Appearance */
+  font-size: 13px;
+  /* Consistent font size */
+  color: var(--text-primary);
+  text-decoration: none;
+  /* Remove underline from links */
+  background: transparent;
+  /* Ensure no background by default */
+  border: none;
+  /* Remove border from buttons */
+  border-radius: 8px;
+  /* Rounded corners for items */
+  cursor: pointer;
+  text-align: left;
+  /* Ensure text aligns left for buttons */
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* --- Icons inside Dropdown Items --- */
+.dropdown-menu .dropdown-item i.fas,
+/* Font Awesome */
+.dropdown-menu .dropdown-item svg {
+  /* SVG */
+  width: 16px;
+  height: 16px;
+  color: var(--text-secondary);
+  /* Subtle icon color */
+  fill: var(--text-secondary);
+  /* For SVG */
+  flex-shrink: 0;
+  /* Prevent icon from shrinking */
+  text-align: center;
+  transition: color 0.15s ease, fill 0.15s ease;
+}
+
+/* --- Hover State for Items --- */
+.dropdown-menu .dropdown-item:hover {
+  background-color: var(--bg-primary);
+  /* Use theme hover color */
+  color: var(--text-primary);
+  /* Ensure text stays primary color */
+}
+
+.dropdown-menu .dropdown-item:hover i.fas,
+.dropdown-menu .dropdown-item:hover svg {
+  color: var(--text-primary);
+  /* Match icon color to text on hover */
+  fill: var(--text-primary);
+  /* For SVG */
+}
+
+/* --- Destructive Action Styling (e.g., Leave/Delete) --- */
+.dropdown-menu .dropdown-item.destructive-action {
+  color: var(--destructive-red, #ef4444);
+  /* Use destructive red */
+}
+
+.dropdown-menu .dropdown-item.destructive-action i.fas {
+  color: var(--destructive-red, #ef4444);
+  /* Make icon red too */
+}
+
+.dropdown-menu .dropdown-item.destructive-action:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  /* Light red background */
+  color: #c0392b;
+  /* Darker red text on hover */
+}
+
+.dropdown-menu .dropdown-item.destructive-action:hover i.fas {
+  color: #c0392b;
+  /* Darker red icon on hover */
+}
+
+/* --- Divider --- */
+.dropdown-divider {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 6px 0;
+  /* Space above/below divider */
+}
+
+/* --- Specific Styles for Profile Popup --- */
+/* (Keep these if they are necessary for the profile popup layout) */
+.profile-popup-container {
+  width: 320px;
+  padding: 0;
+  border-radius: 16px;
+}
+
+/* ... (include other specific profile-popup styles if needed) ... */
+
+/* --- Specific Styles for Group Options Button --- */
+.group-options-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  margin-left: 10px;
+  /* Space it from the name */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.group-options-btn:hover {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Make sure the main settings dropdown button uses these styles too */
+#settingsBtn {
+  /* Styles already defined in styles.css should cover this */
+}
+
+#profileBtn {
+  /* Styles already defined in styles.css should cover this */
+}
+
+.dropdown-menu {
+  /* ... keep existing styles like position, background, border, etc. ... */
+
+  /* --- ADD THESE LINES to hide by default --- */
+  opacity: 0;
+  transform: translateY(-5px) scale(0.95);
+  visibility: hidden;
+  pointer-events: none;
+  /* Prevent clicks when hidden */
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+  /* Keep transition */
+}
+
+/* --- Rule to SHOW the dropdown when .show class is added --- */
+.dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  visibility: visible;
+  pointer-events: auto;
+  /* Allow clicks when visible */
+}
+
+
+/* =================================================================
+   DROPDOWN MENU VISIBILITY FIX
+================================================================= */
+
+/* --- HIDE dropdowns by default --- */
+.dropdown-menu {
+  /* ... keep existing styles like position, background, border, etc. ... */
+
+  /* --- ADD/ENSURE THESE LINES --- */
+  opacity: 0;
+  transform: translateY(-5px) scale(0.95);
+  visibility: hidden;
+  pointer-events: none;
+  /* Prevent clicks when hidden */
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+  /* Add transition */
+}
+
+/* --- SHOW dropdowns when the .show class is added by JS --- */
+.dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  visibility: visible;
+  pointer-events: auto;
+  /* Allow clicks when visible */
+}
+
+
+/* =================================================================
+   FIX: Make Manage/Add Panels Fill TeamSpaces Area
+================================================================= */
+
+/* Ensure the main TeamSpaces container itself fills its parent */
+#sarthiChatStudioView {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  /* Make sure it takes full height */
+  overflow: hidden;
+  /* Prevent its own scrollbars */
+}
+
+/* Style the Manage and Add Member panels */
+#doc-panel-manage-group-view,
+#doc-panel-add-member-view {
+  display: flex;
+  /* Make them flex containers */
+  flex-direction: column;
+  /* Stack header and body vertically */
+  height: 100%;
+  /* Make them fill the sarthiChatStudioView height */
+  overflow: hidden;
+  /* Prevent the panel itself from scrolling */
+}
+
+/* Style the header within these panels */
+#doc-panel-manage-group-view .panel-view-header,
+#doc-panel-add-member-view .panel-view-header {
+  flex-shrink: 0;
+  /* Prevent header from shrinking */
+  /* Keep existing padding, border from .panel-view-header */
+}
+
+/* Style the main content body within these panels */
+#doc-panel-manage-group-view .panel-view-body,
+#doc-panel-add-member-view .panel-view-body {
+  flex-grow: 1;
+  /* Allow body to take remaining vertical space */
+  overflow-y: auto;
+  /* Allow ONLY the body content to scroll */
+  padding: 16px;
+  /* Add padding inside the scrollable body */
+  /* Optional: Hide scrollbars like other panels */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
+}
+
+/* Optional: Hide scrollbars for WebKit browsers */
+#doc-panel-manage-group-view .panel-view-body::-webkit-scrollbar,
+#doc-panel-add-member-view .panel-view-body::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+/* =================================================================
+   REVISED: Create Group Modal - Friend Checklist (Circular Checkbox)
+================================================================= */
+
+/* Container for the friend list (Keep existing styles) */
+#createGroupModal #group-friend-list {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 8px;
+  max-height: 250px;
+  overflow-y: auto;
+  background-color: var(--bg-primary);
+}
+
+/* Individual friend item (Keep existing styles) */
+#createGroupModal .friend-checklist-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: var(--bg-secondary);
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  user-select: none;
+}
+
+#createGroupModal .friend-checklist-item:last-child {
+  margin-bottom: 0;
+}
+
+#createGroupModal .friend-checklist-item:hover {
+  background-color: var(--bg-primary);
+  border-color: var(--accent-color);
+}
+
+/* Profile picture (Keep existing styles) */
+#createGroupModal .friend-checklist-item img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+/* Friend name (Keep existing styles) */
+#createGroupModal .friend-checklist-item span {
+  font-size: 14px;
+  color: var(--text-primary);
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+/* --- NEW: Custom CIRCULAR Checkbox Styling --- */
+
+/* Hide the default checkbox */
+#createGroupModal .friend-checklist-item input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  /* Make it smaller */
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--border-color);
+  /* Slightly thinner border */
+  /* Make it circular */
+  border-radius: 50%;
+  background-color: var(--bg-secondary);
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  margin: 0;
+  display: grid;
+  /* Use grid to center the checkmark */
+  place-content: center;
+  /* Center horizontally and vertically */
+}
+
+/* Style when checkbox is hovered */
+#createGroupModal .friend-checklist-item:hover input[type="checkbox"] {
+  border-color: var(--text-secondary);
+  /* Subtle hover border */
+}
+
+/* Style when checkbox is checked */
+#createGroupModal .friend-checklist-item input[type="checkbox"]:checked {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+/* Create the checkmark using ::before (centered better in a circle) */
+#createGroupModal .friend-checklist-item input[type="checkbox"]::before {
+  content: '';
+  width: 8px;
+  /* Smaller checkmark width */
+  height: 8px;
+  /* Smaller checkmark height */
+  transform: scale(0);
+  /* Hide by default */
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--accent-text);
+  /* Color of the check */
+  /* Make it look like a checkmark */
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform-origin: bottom left;
+}
+
+/* Show the checkmark when checked */
+#createGroupModal .friend-checklist-item input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+
+
+
+/* =================================================================
+   DROPDOWN MENU VISIBILITY FIX (REVISED FOR CLASS SEPARATION)
+================================================================= */
+
+
+
+/* --- 2. State A: HEADER MENU SHOWING (Controlled by JS adding the .show class) --- */
+.dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+
+/* --- 3. New Specific Class for File Actions (Controlled by JS toggling the .hidden class) --- */
+/* The file menus MUST inherit the .dropdown-menu base styles but use a different visibility name */
+.file-action-dropdown {
+  /* Inherits base styles from .dropdown-menu */
+}
+
+/* --- 4. State B: FILE MENU HIDING (Controlled by JS adding the .hidden class) --- */
+/* This is explicitly for the file menu to work correctly with the 'hidden' toggle in JS */
+.file-action-dropdown.hidden {
+  opacity: 0;
+  transform: translateY(-5px) scale(0.95);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.file-action-dropdown:not(.hidden) {
+  /* Show state is the absence of the 'hidden' class, 
+       but since it inherits the HIDDEN default from .dropdown-menu,
+       we must manually override the default hidden state when it ISN'T hidden. */
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* In styles.css, add this at the end */
+
+/* Styles for Share Modal Checklist */
+#share-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.friend-checklist-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  user-select: none;
+}
+
+.friend-checklist-item:hover {
+  background-color: var(--bg-secondary);
+}
+
+.friend-checklist-item img,
+.friend-checklist-item .profile-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 12px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.friend-checklist-item .profile-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.friend-checklist-item span {
+  font-size: 14px;
+  color: var(--text-primary);
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.friend-checklist-item input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+  flex-shrink: 0;
+}
+
+/* In styles.css */
+
+/* Add margin-top to the sources header only when the user is a viewer */
+.sidebar-content.role-viewer .sources-header {
+  margin-top: 16px;
+  /* Adjust this value (e.g., 10px, 20px) as needed */
+}
+
+
+
+/* In styles.css */
+
+.message.system-message .message-content {
+  background-color: var(--bg-primary);
+  /* Use a slightly different background */
+  color: var(--text-secondary);
+  /* Use secondary text color */
+  border: 1px dashed var(--border-color);
+  /* Dashed border */
+  border-radius: 8px;
+  /* Less rounded than regular messages */
+  font-size: 13px;
+  /* Slightly smaller text */
+  text-align: center;
+  /* Center the text */
+  width: 100%;
+  /* Make it span wider */
+  max-width: 95%;
+  /* Limit width slightly */
+  margin: 5px auto;
+  /* Center the box horizontally */
+  padding: 8px 12px;
+}
+
+/* Style for the link inside the system message */
+.system-message a.shared-notebook-link {
+  color: var(--accent-color);
+  /* Use accent color for the link */
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.system-message a.shared-notebook-link:hover {
+  text-decoration: none;
+  /* Remove underline on hover */
+}
+
+/* Align icon vertically if needed */
+.system-message .message-content i {
+  vertical-align: middle;
+}
+
+
+/* =================================================================
+   NEW: SARTHI CHAT HEADER ENHANCEMENTS (document.html)
+================================================================= */
+
+/* Ensure the header uses flexbox and space-between to position elements */
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Ensure the title container is positioned correctly */
+}
+
+/* 1. Container to Center the Title */
+.chat-title-container {
+  flex-grow: 1;
+  /* Allows this container to take up all available space */
+  text-align: center;
+  /* Centers the text element inside this space */
+}
+
+/* 2. Style for the Previous Chats Button (Left) */
+.chat-history-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 18px;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.chat-history-btn:hover {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* 3. Style for the New Chat Button (Right) */
+.new-chat-btn {
+  background: var(--accent-color);
+  border: none;
+  color: var(--accent-text);
+  padding: 8px 12px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.new-chat-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+
+/* Update .chat-header-left-group to contain history and refresh buttons */
+.chat-header-left-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* Space between the two icons */
+  flex-shrink: 0;
+}
+
+/* Style for the Refresh Button (similar to history button) */
+.chat-refresh-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 18px;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.chat-refresh-btn:hover {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+
+/* =================================================================
+   NEW: CHAT HISTORY PANEL STYLES
+================================================================= */
+.chat-history-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--panel-width);
+  /* Adjust as needed, or use a fixed size */
+  height: 100%;
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.chat-history-panel.panel-hidden {
+  transform: translateX(-100%);
+  /* Slide out to hide */
+}
+
+/* Style for individual chat session items */
+.chat-session-item {
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.chat-session-item:hover {
+  background-color: var(--bg-primary);
+}
+
+.chat-session-item.active {
+  background-color: var(--accent-color-faint);
+  /* Visually indicate the currently loaded chat */
+  border-left: 3px solid var(--accent-color);
+}
+
+
+/* =================================================================
+   NEW: HISTORY PANEL VISIBILITY FIX
+================================================================= */
+
+/* Define the fundamental 'hidden' utility class */
+.hidden {
+  display: none !important;
+}
+
+/* Ensure the sidebar content is a positioning context for the history panel */
+.sidebar-content {
+  /* Add this if it's not already present. It makes absolute positioning work */
+  position: relative;
+}
+
+/* Fix for the new history panel to cover the entire sidebar area */
+#simpleHistoryPanel {
+  /* The inline styles you added in document.html already handle this:
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+    But ensure the visibility is correctly linked to the .hidden class: */
+
+  /* If you see the panel content briefly before the click, 
+       this rule will fix it because of the .hidden rule above */
+}
+
+
+/* =================================================================
+   NEW: COMPACT CHAT HISTORY STYLES
+================================================================= */
+
+/* Container for all sessions */
+#chatHistoryList {
+  padding: 0;
+  /* Remove top/side padding to make items edge-to-edge */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style for individual session item */
+.chat-session-item {
+  padding: 8px 15px;
+  /* Smaller vertical padding for compact look */
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  display: flex;
+  /* Enable flex for title and icon positioning */
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  /* Needed for positioning the delete button */
+  min-height: 45px;
+  /* Small fixed minimum height */
+}
+
+.chat-session-item:hover {
+  background-color: var(--bg-primary);
+  /* Highlight on hover */
+}
+
+.chat-session-item.active {
+  background-color: var(--accent-color-faint, rgba(38, 36, 36, 0.1));
+  border-left: 3px solid var(--accent-color);
+  padding-left: 12px;
+  /* Adjust padding due to border */
+}
+
+/* Session info (title and date) */
+.session-info {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.session-title {
+  font-size: 14px;
+  /* Small font size */
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.session-date {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* Delete Button Styles (Hidden by default) */
+.delete-history-btn {
+  background: none;
+  border: none;
+  color: var(--destructive-red);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 5px;
+  border-radius: 50%;
+  /* Position the button on the far right, slightly obscuring the text */
+  position: absolute;
+  right: 5px;
+  opacity: 0;
+  /* Hidden by default */
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+  z-index: 20;
+  /* Ensure it is above text */
+}
+
+/* Show the delete button only when hovering the entire item */
+.chat-session-item:hover .delete-history-btn {
+  opacity: 1;
+  /* Fade in on hover */
+  background-color: var(--bg-primary);
+  /* Background to hide text underneath */
+}
+
+/* Change background slightly on button hover for interaction feel */
+.delete-history-btn:hover {
+  background-color: var(--bg-primary);
+  transform: scale(1.1);
+}
+
+
+/* =================================================================
+   UPDATED: COMPACT CHAT HISTORY STYLES
+================================================================= */
+
+/* Container for all sessions */
+#chatHistoryList {
+  padding: 10px 15px;
+  /* Added internal padding to the container */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  /* Added gap between items */
+}
+
+/* Style for individual session item */
+.chat-session-item {
+  padding: 10px 15px;
+  /* Consistent padding */
+  /* REMOVED border-bottom to use gap and shadow/border for separation */
+  border: 1px solid var(--border-color);
+  /* Subtle border for definition */
+  border-radius: 12px;
+  /* Soft, modern rounded corners */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  min-height: 45px;
+}
+
+.chat-session-item:hover {
+  background-color: var(--bg-primary);
+  border-color: var(--accent-color);
+  /* Highlight border on hover */
+  box-shadow: 0 2px 4px var(--shadow-color);
+  /* Subtle lift effect */
+}
+
+/* Style for the active (currently loaded) chat session */
+.chat-session-item.active {
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+  /* Ensure text is visible on dark accent */
+  border-color: var(--accent-color);
+  transform: scale(1.01);
+  /* Slightly emphasize active item */
+}
+
+/* Ensure text colors look good in the active state */
+.chat-session-item.active .session-title,
+.chat-session-item.active .session-date {
+  color: var(--accent-text);
+}
+
+
+/* Session info (title - now first message) */
+.session-info {
+  flex-grow: 1;
+  min-width: 0;
+  /* NEW: Add right margin to create separation from the delete icon */
+  margin-right: 40px;
+}
+
+.session-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat-session-item.active .session-title {
+  color: var(--accent-text);
+  /* Ensure title color is correct when active */
+}
+
+/* REMOVED .session-date styles 
+*/
+
+
+/* Delete Button Styles (Hidden by default) */
+.delete-history-btn {
+  /* Keep position: absolute so it doesn't affect the title's flex width */
+  position: absolute;
+  right: 15px;
+  /* Position it correctly from the edge */
+  background: none;
+  border: none;
+  color: var(--destructive-red);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 5px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+  z-index: 20;
+}
+
+/* Show the delete button only when hovering the entire item */
+.chat-session-item:hover .delete-history-btn {
+  opacity: 1;
+  background-color: var(--bg-primary);
+}
+
+/* Fix delete button visibility when hovering over the active item */
+.chat-session-item.active:hover .delete-history-btn {
+  background-color: var(--accent-color);
+  /* Match active background */
+}
+
+/* =================================================================
+   NEW: CHAT WIDTH FIX
+================================================================= */
+/* This rule targets the message bubble element and increases its maximum width 
+   to 95% of the chat container, effectively giving it a "full width" look. */
+.message-bubble {
+  /* Set max-width to a high percentage (e.g., 95%) to allow full width for output */
+  max-width: 95% !important;
+}
+
+/* Ensure rich content like tables and code blocks also use the full space of the message bubble */
+.table-wrapper,
+.code-block {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* --- styles.css --- */
+/* Add this new section or ensure these styles are present and correctly prioritized. */
+
+/* === FIX: Ensure Message Layout is Correct === */
+/* Remove the unused message-avatar and ensure bubble is inside the message container */
+.message {
+  max-width: 100%;
+  display: flex;
+  margin-bottom: 8px;
+  animation: messageSlideIn 0.3s ease-out;
+}
+
+/* Remove message-avatar block if it exists: 
+.message-avatar {
+    display: none; 
+}
+*/
+
+.message-content {
+  max-width: 100%;
+  padding: 9px 13px;
+  /* Reduced padding */
+  border-radius: 20px;
+  font-size: 13px;
+  line-height: 1.45;
+  box-shadow: 0 1px 2px var(--shadow-color);
+  word-wrap: break-word;
+}
+
+/* === FIX: Style for Summary Messages === */
+
+/* Ensure the summary uses a distinct background like the AI message for consistency */
+.message.ai .message-content {
+  background: var(--message-ai-bg);
+  color: var(--message-ai-text);
+  border: 1px solid var(--border-color);
+  border-bottom-left-radius: 6px;
+  /* Ensure the max-width is sufficient for the summary */
+  max-width: 95%;
+  /* Use the wider max-width for the bubble text itself */
+}
+
+/* Ensure rich content like tables and lists inside the summary are well-styled */
+.message.ai .message-content strong {
+  color: var(--text-primary);
+  /* Ensure headings/strong titles are clear */
+  font-weight: 600;
+}
+
+/* Fix for Summary Markdown Lists (Key Topics, Important Points) */
+.message.ai .message-content ul {
+  list-style-type: disc;
+  margin: 8px 0 8px 20px;
+  padding: 0;
+}
+
+.message.ai .message-content li {
+  margin-bottom: 4px;
+}
+
+/* New style for the summary message text wrapper inside the bubble (from your existing code) */
+.message-content .message-text {
+  /* Ensure this wrapper doesn't break the layout inside the bubble */
+  padding: 0;
+}
+
+
+/* ADD THIS TO styles.css (or similar CSS file) */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--border-color);
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked+.slider {
+  background-color: var(--primary-color);
+}
+
+input:checked+.slider:before {
+  transform: translateX(16px);
+}
+
+.slider.round {
+  border-radius: 24px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* =================================================================
+   FINAL MERGED SIDEBAR + BUTTONS + FOOTER STYLES
+================================================================= */
+
+/* ---------------------------------------------------------------
+   GLOBAL LAYOUT FIXES
+--------------------------------------------------------------- */
+.main-container {
+  height: 100vh !important;
+  margin-top: 0 !important;
+  padding: 8px;
+}
+
+/* ---------------------------------------------------------------
+   NEW CHAT BUTTON (Sidebar)
+--------------------------------------------------------------- */
+.new-chat-sidebar-btn {
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+  border: 1px solid var(--accent-color);
+  padding: 10px;
+  width: 100%;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  margin-bottom: 8px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.new-chat-sidebar-btn:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+/* Collapsed Mode (New Chat Button) */
+.sidebar.collapsed .new-chat-sidebar-btn {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.sidebar.collapsed .new-chat-sidebar-btn .btn-text {
+  display: none;
+}
+
+/* ---------------------------------------------------------------
+   ADD NEW SOURCE BUTTON (Below New Chat)
+--------------------------------------------------------------- */
+.add-btn {
+  margin-top: 0 !important;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.add-btn:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--accent-color);
+}
+
+/* ---------------------------------------------------------------
+   UNIVERSAL ROUND FOOTER ICON BUTTON
+--------------------------------------------------------------- */
+.footer-icon-btn,
+.sidebar-footer .theme-toggle-btn,
+.sidebar-footer .settings-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 16px;
+}
+
+.footer-icon-btn:hover,
+.sidebar-footer .theme-toggle-btn:hover,
+.sidebar-footer .settings-btn:hover {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* ---------------------------------------------------------------
+   SIDEBAR FOOTER + ACTIONS
+--------------------------------------------------------------- */
+.sidebar-footer {
+  margin-top: auto;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-secondary);
+  flex-shrink: 0;
+}
+
+.footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ---------------------------------------------------------------
+   DROPDOWNS - POPUP POSITION FIXES
+--------------------------------------------------------------- */
+
+/* Pop upward from footer buttons */
+.footer-popup {
+  top: auto !important;
+  bottom: 125% !important;
+  left: 0;
+  transform-origin: bottom left;
+  margin-bottom: 5px;
+}
+
+/* Settings dropdown → align to right */
+.footer-actions .footer-popup {
+  left: auto;
+  right: 0;
+  transform-origin: bottom right;
+}
+
+/* ---------------------------------------------------------------
+   COLLAPSED SIDEBAR - FOOTER BEHAVIOR
+--------------------------------------------------------------- */
+.sidebar.collapsed .sidebar-footer {
+  flex-direction: column;
+  gap: 15px;
+  padding: 16px 0;
+}
+
+.sidebar.collapsed .footer-actions {
+  flex-direction: column;
+}
+
+/* Collapsed: Profile dropdown opens to the right */
+.sidebar.collapsed .footer-popup {
+  bottom: 0 !important;
+  left: 100% !important;
+  margin-left: 10px;
+}
+
+
+/* =================================================================
+   SMALLER SIDEBAR & HORIZONTAL BUTTONS
+================================================================= */
+
+/* 1. Horizontal Button Layout */
+.sidebar-actions-row {
+  display: flex;
+  gap: 8px;
+  padding-bottom: 10px;
+  /* Space between buttons */
+}
+
+/* 2. Style for Compact Buttons (New Chat & Add) */
+.compact-btn {
+  flex: 1;
+  /* Both buttons take equal width */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 10px;
+  /* Smaller padding */
+  height: 32px;
+  /* Fixed smaller height */
+  font-size: 12px;
+  /* Smaller text */
+  border-radius: 8px;
+  /* Slightly tighter corners */
+  margin: 0 !important;
+  /* Remove individual margins */
+}
+
+/* Specific color tweaks to ensure they look distinct */
+.new-chat-sidebar-btn.compact-btn {
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+}
+
+.add-btn.compact-btn {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.add-btn.compact-btn:hover {
+  border-color: var(--accent-color);
+  background-color: var(--bg-secondary);
+}
+
+/* 3. Make the Sidebar Content (Files) Smaller */
+
+/* Reduce padding and font size for the File Items */
+.file-item {
+  padding: 8px 10px;
+  /* Reduced from 12px */
+  gap: 8px;
+}
+
+.file-icon {
+  width: 24px;
+  /* Smaller icon box */
+  height: 24px;
+  font-size: 14px;
+  /* Smaller icon inside */
+  border-radius: 6px;
+}
+
+.file-name {
+  font-size: 12px;
+  /* Smaller filename text */
+}
+
+.file-size {
+  font-size: 10px;
+  /* Tiny size text */
+}
+
+/* Reduce size of the "..." menu button and checkbox */
+.menu-btn {
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+}
+
+.checkbox-wrapper-31 {
+  width: 16px;
+  height: 16px;
+}
+
+/* 4. Adjust Sources Header (Select All) */
+.sources-header {
+  margin-bottom: 5px;
+}
+
+.sources-header-title {
+  font-size: 11px;
+}
+
+/* 5. Handle Collapsed State */
+.sidebar.collapsed .sidebar-actions-row {
+  flex-direction: column;
+  /* Stack them again when collapsed */
+  gap: 5px;
+}
+
+.sidebar.collapsed .compact-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
+  /* Make them circles */
+}
+
+.sidebar.collapsed .btn-text {
+  display: none;
+}
+
+
+#newChatBtn {
+  border-radius: 20px;
+}
+
+#add {
+  border-radius: 20px;
+}
+
+
+/* =================================================================
+   FIX: SELECT ALL HEADER ALIGNMENT & STYLE
+================================================================= */
+
+.sources-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Match padding with .file-item (8px 10px) to align checkboxes perfectly */
+  padding: 8px 10px;
+  border-bottom: 1px solid transparent;
+}
+
+.sources-header-title {
+  /* Switch to clean sans-serif font instead of cursive */
+  font-family: var(--font-sans, sans-serif);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  /* Optional: Make it uppercase for a better "header" look */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Ensure the header checkbox is vertically centered and same size */
+.sources-header .checkbox-wrapper-31 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Ensure it respects the global size set in your file */
+  width: 16px;
+  height: 16px;
+  margin-right: 7.5px;
+}
+
+
+/* =================================================================
+   FIX: ALIGNMENT OF DOTS & CHECKBOX
+================================================================= */
+
+/* 1. Force the container to hold items in the dead center */
+.file-actions {
+  display: flex;
+  align-items: center !important;
+  /* Forces vertical centering */
+  justify-content: flex-end;
+  gap: 10px;
+  /* Consistent spacing between dots and check */
+  height: 100%;
+  /* Match height of the row */
+}
+
+/* 2. Fix the Checkbox Position */
+.file-item .checkbox-wrapper-31 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 !important;
+  /* Remove any default margins */
+
+  /* Move it UP slightly to match the optical center of the dots */
+  position: relative;
+  top: -1px;
+  transform: none !important;
+  /* Reset any previous transforms */
+}
+
+/* 3. Fix the Menu Button (Dots) Position */
+.menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  /* Remove padding that might shift the icon */
+  width: 24px;
+  height: 24px;
+
+  /* Ensure the icon inside is centered */
+  line-height: 1;
+}
+
+/* 4. Ensure the icon inside the button is centered */
+.menu-btn i {
+  display: block;
+  line-height: inherit;
+}
+
+
+
+/* =================================================================
+   FIX: HIDE TOGGLE BTN & USE LOGO TO EXPAND
+================================================================= */
+
+/* 1. Hide the Toggle Button ([|]) when sidebar is collapsed */
+.sidebar.collapsed .sidebar-toggle-btn {
+  display: none !important;
+}
+
+/* 2. Show the Header Left container (where the logo is) */
+/* We previously hid this, but now we need it visible for the logo */
+.sidebar.collapsed .header-left {
+  display: flex !important;
+  justify-content: center;
+  width: 100%;
+  /* Center logo in the narrow sidebar */
+}
+
+/* 3. Ensure the Title Text is hidden (keep only logo) */
+.sidebar.collapsed .sidebar-title {
+  display: none !important;
+}
+
+/* 4. Make the Logo Clickable and Centered */
+.sidebar.collapsed .logo-icon {
+  cursor: pointer;
+  /* Shows hand cursor */
+  margin: 0 !important;
+  /* Centers it perfectly */
+  pointer-events: auto;
+  /* Ensures it can receive clicks */
+}
+
+/* Optional: Add a hover effect to the logo when collapsed so user knows it's clickable */
+.sidebar.collapsed .logo-icon:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
+
+
+/* =================================================================
+   FIX: COLLAPSED SIDEBAR CLEANUP
+================================================================= */
+
+/* 1. Fix "New Chat" and "Add" Buttons alignment */
+.sidebar.collapsed .sidebar-actions-row {
+  flex-direction: column;
+  align-items: center;
+  /* Centers the buttons horizontally */
+  gap: 10px;
+}
+
+.sidebar.collapsed .compact-btn {
+  /* Ensure they stay perfectly circular and centered */
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin: 0 !important;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 2. Hide the "Three Dots" Menu on Files */
+.sidebar.collapsed .file-item .file-menu-container {
+  display: none !important;
+}
+
+/* Ensure the file item layout adjusts (only show icon and checkbox) */
+.sidebar.collapsed .file-item {
+  justify-content: center;
+  /* Center content */
+  /* Reduce padding */
+}
+
+.sidebar.collapsed .file-actions {
+  width: auto;
+  /* Allow it to shrink */
+  gap: 0;
+}
+
+/* 3. Hide Footer Buttons (History & Settings) */
+.sidebar.collapsed #chatHistoryBtn,
+.sidebar.collapsed #settingsBtn {
+  display: none !important;
+}
+
+/* Optional: Adjust spacing for remaining footer icons (Theme, Share, Profile) */
+.sidebar.collapsed .footer-actions {
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+/* =================================================================
+   FIX: COLLAPSED SIDEBAR - SIZES & VISIBILITY
+================================================================= */
+
+/* 1. Hide the Checkbox on uploaded files when collapsed */
+.sidebar.collapsed .file-item .checkbox-wrapper-31 {
+  display: none !important;
+}
+
+/* 2. Make "New Chat" and "Add" buttons BIGGER */
+.sidebar.collapsed .compact-btn {
+  width: 44px !important;
+  /* Increased from 36px */
+  height: 44px !important;
+  /* Increased from 36px */
+  border-radius: 50%;
+  margin-bottom: 10px;
+  /* Add spacing between buttons */
+}
+
+.sidebar.collapsed .compact-btn .btn-icon {
+  font-size: 18px !important;
+  /* Make the + and upload icons bigger */
+}
+
+/* 3. Make Uploaded File Icons BIGGER */
+.sidebar.collapsed .file-icon {
+  width: 20px !important;
+  /* Increased from 24px */
+  height: 20px !important;
+  /* Increased from 24px */
+  font-size: 18px !important;
+  /* Icon inside becomes larger */
+  border-radius: 8px;
+  /* Keep rounded corners */
+}
+
+/* 4. Center the bigger file icons properly */
+.sidebar.collapsed .file-item {
+  justify-content: center;
+  /* Add vertical breathing room */
+}
+
+
+/* =================================================================
+   FIX: COLLAPSED SIDEBAR - FINAL POLISH
+   (Big Buttons, Small Icons, Perfect Centering)
+================================================================= */
+
+/* 1. "New Chat" & "Add" Buttons - BIG BUTTON, SMALL ICON */
+.sidebar.collapsed .compact-btn {
+  width: 50px !important;
+  /* Big Button Circle */
+  height: 50px !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  margin: 0 0 12px 0 !important;
+  /* More spacing (padding) between buttons */
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 2px 6px var(--shadow-color);
+  /* Optional: Adds pop */
+}
+
+/* 2. The Icon inside the button - SMALLER */
+.sidebar.collapsed .compact-btn .btn-icon {
+  font-size: 18px !important;
+  /* Small Icon inside Big Button */
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  line-height: 1 !important;
+}
+
+/* 3. UPLOADED FILE ICONS - STRICT CENTERING */
+/* Hide the wrappers completely so they don't push the icon off-center */
+.sidebar.collapsed .file-info,
+.sidebar.collapsed .file-actions {
+  display: none !important;
+}
+
+/* Center the File Item Container */
+.sidebar.collapsed .file-item {
+  justify-content: center !important;
+  padding: 12px 0 !important;
+  /* More vertical padding for cleaner look */
+  width: 100%;
+}
+
+/* Style the File Icon itself */
+.sidebar.collapsed .file-icon {
+  width: 20px !important;
+  /* Good click target size */
+  height: 20px !important;
+  font-size: 20px !important;
+  /* Clear icon size */
+  margin: 0 !important;
+  /* Remove margins */
+  border-radius: 10px;
+  /* Softer corners */
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+
+
+/* =================================================================
+   FIX: INCREASE CONTAINER HEIGHT & BUTTON STYLING
+================================================================= */
+
+/* 1. Increase Height of the Button Container in Collapsed Mode */
+.sidebar.collapsed .sidebar-actions-row {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  /* Increase spacing so buttons fit comfortably */
+  gap: 15px !important;
+  margin-top: 5px !important;
+  /* Push down from logo */
+  margin-bottom: 5px !important;
+  /* Push away from file list */
+  min-height: 100px !important;
+  /* Force container to be tall enough */
+  width: 100%;
+}
+
+/* 2. Style the "New Chat" & "Add" Buttons (Big Circle, Small Icon) */
+.sidebar.collapsed .compact-btn {
+  width: 45px !important;
+  /* Big Circle Width */
+  height: 48px !important;
+  /* Big Circle Height */
+  border-radius: 50% !important;
+  /* Perfect Circle */
+  padding: 0 !important;
+  margin: 0 !important;
+
+  /* Flex to center the icon */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  /* Optional: Add shadow to make them pop */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 3. Make the Icon inside SMALLER */
+.sidebar.collapsed .compact-btn .btn-icon {
+  font-size: 14px !important;
+  /* Small Icon */
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 4. Center the Uploaded File Icons (and hide extra text) */
+.sidebar.collapsed .file-item {
+  justify-content: center !important;
+  padding: 10px 0 !important;
+  width: 100%;
+}
+
+.sidebar.collapsed .sources-content {
+  padding: 1px;
+}
+
+.sidebar.collapsed .file-info,
+.sidebar.collapsed .file-actions {
+  display: none !important;
+  /* Hide text & menu */
+}
+
+.sidebar.collapsed .file-icon {
+  margin: 0 !important;
+}
+
+
+/* =================================================================
+   FIX: INCREASE LOGO SIZE (NORMAL & COLLAPSED)
+================================================================= */
+
+/* 1. Normal (Expanded) Sidebar Logo */
+.logo-icon {
+  width: 48px !important;
+  /* Increased size */
+  height: 48px !important;
+  /* Increased size */
+  /* Optional: Tweaking margin to keep title aligned */
+  margin-right: 5px;
+}
+
+/* 2. Collapsed Sidebar Logo */
+.sidebar.collapsed .logo-icon {
+  width: 40px !important;
+  /* Even bigger when collapsed for visibility */
+  height: 40px !important;
+  margin: 0 !important;
+  /* Ensure it stays centered */
+}
+
+/* 3. Ensure the Image scales perfectly */
+.logo-icon .logo-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+  /* Keeps the aspect ratio correct */
+}
+
+/* Around line 83 */
+.chat-section {
+  /* ... existing styles ... */
+  border: none;
+  /* or 1px solid var(--bg-primary) if you want to hide the border */
+  box-shadow: none;
+  /* optional: if you want to remove the shadow too */
+}
+
+/* Update the main chat wrapper to match the global background */
+.chat-section {
+  background-color: var(--bg-primary) !important;
+  /* Matches the beige background */
+  border: none !important;
+  /* Removes the border */
+  box-shadow: none !important;
+  /* Removes the shadow */
+  /* Ensure the top corners are still curved for the content inside */
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+/* Ensure the inner containers are transparent so the primary color shows through */
+.chat-messages-wrapper,
+.chat-messages-container {
+  background-color: transparent !important;
+}
+
+.message.ai .message-content {
+  /* Set background to primary (beige) */
+  background: var(--bg-primary) !important;
+
+  /* Change text color to primary text color (dark gray/black) */
+  color: var(--text-primary) !important;
+
+  /* Add a border so the bubble doesn't disappear against the same background */
+  border: 1px solid var(--border-color);
+
+  /* Optional: Maintain the border radius */
+  border-bottom-left-radius: 6px;
+}
+
+/* Update AI message to look like plain text (no box, full width) */
+.message.ai .message-content {
+  /* 1. Remove the box styling */
+  background: transparent !important;
+  /* No background color */
+  border: none !important;
+  /* No border */
+  box-shadow: none !important;
+  /* No shadow */
+
+  /* 2. Force full width */
+  width: 100% !important;
+  /* Stretch to container width */
+  max-width: 100% !important;
+  /* Override any bubble limits */
+
+  /* 3. Text styling */
+  color: var(--text-primary) !important;
+  padding: 0 !important;
+  /* Remove bubble padding for text alignment */
+  margin-top: 5px;
+  /* Add spacing if needed */
+}
+
+/* Optional: Global reset if the above doesn't catch the shadow */
+.message.ai .message-content {
+  box-shadow: none !important;
+}
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.chat-messages::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.chat-messages {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+/* 1. Make the strip behind the input blend with the page */
+.chat-input-section {
+  /* Matches main background */
+  /* Removes the separator line */
+  /* Add some breathing room at bottom */
+}
+
+/* 2. Style the actual input box to pop out */
+.chat-input-container {
+  background-color: var(--bg-secondary) !important;
+  /* White background for typing area */
+  border: 1px solid var(--border-color) !important;
+  /* Subtle border */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  /* Soft shadow for depth */
+  border-radius: 30px;
+  /* More rounded pill shape */
+}
+
+/* Optional: Ensure text inside input is readable */
+.chat-input {
+  color: var(--text-primary);
+}
+
+/* 1. Make the section container invisible (transparent) */
+.chat-input-section {
+  background-color: transparent !important;
+  /* Removes the strip background */
+  border-top: none !important;
+  /* Removes the top border */
+  box-shadow: none !important;
+  /* Removes any outer shadow */
+  padding: 0 20px 20px 20px;
+  /* Adds spacing from the bottom/sides */
+  flex-shrink: 0;
+  padding-bottom: 5px;
+  /* Ensures it stays at the bottom */
+}
+
+/* 2. Style the input box to look like a floating capsule */
+.chat-input-container {
+  background-color: var(--bg-secondary) !important;
+  /* White/Contrast background */
+  border: 1px solid var(--border-color);
+  /* Subtle border */
+  border-radius: 50px;
+  /* Fully rounded corners */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  /* Drop shadow for floating effect */
+  /* Space inside the capsule */
+  margin-top: 10px;
+  /* Space between messages and input */
+
+  /* Ensure flex layout for input + button works inside */
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+/* 3. Optional: Adjust the input text area to fit the new shape */
+.chat-input {
+  background: transparent;
+  /* Transparent so it takes the capsule's color */
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  resize: none;
+  /* Prevent manual resizing breaking the shape */
+}
+
+
+
+
+/* Wrapper: Centers the input at the bottom with minimal spacing */
+.chat-input-section {
+  background-color: transparent !important;
+  border-top: none !important;
+  box-shadow: none !important;
+
+  display: flex;
+  justify-content: center;
+  /* Horizontal Center */
+  align-items: flex-end;
+  /* Align to bottom */
+
+  /* Minimal padding: 10px from bottom so it doesn't touch the edge */
+  padding: 0 20px 10px 20px;
+  padding-bottom: 1px;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+/* The Capsule: Compact, Primary Color, Floating */
+.chat-input-container {
+  background-color: var(--bg-primary) !important;
+  /* Matches main background */
+  border: 2px solid var(--bg-secondary) !important;
+  border-radius: 50px;
+  /* Fully rounded capsule */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  /* Subtle shadow */
+
+  /* Sizing: Smaller and Controlled */
+  width: 100%;
+  max-width: 700px;
+  /* Limits width to look good */
+  padding: 5px 15px;
+  /* Small internal padding */
+  min-height: auto;
+  /* Allow it to be as small as the text */
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+
+/* Focus Effect */
+.chat-input-container:focus-within {
+  border-color: var(--accent-color) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+}
+
+/* The Text Area: Compact text */
+.chat-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+
+  font-size: 14px;
+  /* Standard readable size */
+  font-weight: 500;
+  line-height: 1.4;
+
+  width: 100%;
+  margin: 0;
+  padding: 8px 0;
+  /* Tight vertical padding */
+  resize: none;
+  max-height: 100px;
+}
+
+/* Send Button: Adjusted for smaller height */
+.send-btn {
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+  background: var(--accent-color);
+  color: var(--accent-text);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.send-btn:hover:not(:disabled) {
+  transform: scale(1.1);
+}
+
+
+/* 1. Hide Scrollbar in Chat History Panel */
+#chatHistoryList::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
+}
+
+#chatHistoryList {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+/* 2. Fix Font for "Select all sources" */
+/* This forces the title to use your main "Playwrite US Modern" font (inherited from body) */
+.sources-header-title {
+  font-family: inherit !important;
+  text-transform: none !important;
+  /* Optional: Removes uppercase if you want it natural */
+  letter-spacing: normal !important;
+  font-size: 13px !important;
+  /* Matches other sidebar text size */
+  font-weight: 600 !important;
+}
+
+/* =================================================================
+   FIX: REMOVE STARS & FORCE ICON VISIBILITY
+================================================================= */
+
+
+/* 2. FORCE Welcome Icon to Display */
+.welcome-icon {
+  /* Remove the box container */
+  width: auto !important;
+  height: auto !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+
+  /* Ensure Visibility */
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  /* Icon Size & Color (Solid color ensures visibility) */
+  font-size: 5rem !important;
+  color: var(--text-primary) !important;
+  /* Dark in light mode, Light in dark mode */
+
+  /* Center it */
+  margin: 0 auto 20px auto !important;
+
+  /* Optional: Gentle floating animation for the icon only (remove if unwanted) */
+  animation: floatIcon 4s ease-in-out infinite;
+}
+
+/* 3. Target the icon element directly to be sure */
+.welcome-icon i,
+.welcome-icon svg {
+  font-size: inherit !important;
+  color: inherit !important;
+  display: inline-block !important;
+}
+
+/* 4. Ensure Container Spacing is Clean */
+.welcome-message {
+  padding: 40px 20px !important;
+  background: transparent !important;
+}
+
+/* Define Float Animation (Only for the icon, not background) */
+@keyframes floatIcon {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+
+
+/* --- 2. Fix Sidebar Empty State ("Saved sources...") --- */
+#empty-state {
+  padding: 30px 20px;
+  opacity: 0.7;
+  /* Make it subtle */
+}
+
+.sources-icon {
+  font-size: 32px !important;
+  /* Much smaller, professional size */
+  color: var(--border-color);
+  /* Muted Gray/Beige */
+}
+
+.sources-title {
+  font-family: "Inter", sans-serif !important;
+  /* Clean font for helper text */
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--text-secondary) !important;
+  margin: 0 !important;
+}
+
+/* --- 3. Fix Welcome Screen ("Welcome to your notebook") --- */
+.welcome-message {
+  background: transparent !important;
+  padding: 20px !important;
+  /* Ensure no weird background elements */
+}
+
+
+/* Fix the Main Icon */
+.welcome-icon {
+  font-size: 50px !important;
+  /* Medium-Large (not huge) */
+  color: var(--text-primary) !important;
+
+  /* Optional: Subtle Gradient Text Effect (Professional) */
+  background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* REMOVE Animation */
+  animation: none !important;
+  transform: none !important;
+}
+
+/* Clean up the Title */
+.welcome-title {
+  font-family: "Playwrite US Modern", cursive;
+  font-size: 24px !important;
+  /* Readable size */
+  font-weight: 600 !important;
+  color: var(--text-primary);
+  margin-bottom: 8px !important;
+}
+
+/* Clean up the Description */
+.welcome-description {
+  font-family: "Inter", sans-serif;
+  font-size: 14px !important;
+  color: var(--text-secondary);
+  max-width: 450px;
+  line-height: 1.5;
+  margin: 0 auto 25px auto !important;
+}
+
+/* Ensure font icons inherit size correctly */
+.sources-icon i,
+.sources-icon svg,
+.welcome-icon i,
+.welcome-icon svg {
+  font-size: inherit !important;
+}
+
+
+/* =================================================================
+   URGENT FIX: FORCE ICON VISIBILITY
+================================================================= */
+
+/* 1. Sidebar Icon: Make it darker (Grey) instead of Border Color */
+.sources-icon {
+  font-size: 32px !important;
+  color: var(--text-secondary) !important;
+  /* Visible Grey */
+  /* Reset layout to ensure it's not hidden */
+  width: auto !important;
+  height: auto !important;
+  background: transparent !important;
+  border: none !important;
+  margin: 0 auto 10px auto !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 2. Welcome Icon: Remove Gradient (Make it Solid Black/Dark) */
+.welcome-icon {
+  font-size: 60px !important;
+  color: var(--text-primary) !important;
+  /* Solid Dark Color */
+
+  /* CRITICAL: Remove the gradient settings that made it transparent */
+  background: none !important;
+  -webkit-background-clip: border-box !important;
+  -webkit-text-fill-color: initial !important;
+  /* Resets transparency */
+
+  /* Layout */
+  margin: 0 auto 20px auto !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  height: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  animation: none !important;
+  /* Stop moving */
+}
+
+/* 3. Ensure the FontAwesome element inside inherits the size/color */
+.sources-icon i,
+.sources-icon svg,
+.welcome-icon i,
+.welcome-icon svg {
+  font-size: inherit !important;
+  color: inherit !important;
+  display: inline-block !important;
+  visibility: visible !important;
+}
+
+/* 4. Ensure Sidebar Empty State Container is visible */
+#empty-state {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  opacity: 1 !important;
+  padding-top: 40px;
+}
+
+
+/* Sidebar Empty State Icon - Medium Size */
+.sources-icon {
+  font-size: 60px !important;
+  /* Increased size (was 32px) */
+  color: var(--text-secondary) !important;
+  /* Visible Grey */
+
+  /* Ensure layout is clean */
+  width: auto !important;
+  height: auto !important;
+  background: transparent !important;
+  border: none !important;
+  margin: 0 auto 15px auto !important;
+  /* Spacing below the icon */
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8 !important;
+  /* Slight transparency for a softer look */
+}
+
+
+/* =================================================================
+   FIX: HIDE EMPTY STATE WHEN SIDEBAR IS COLLAPSED
+================================================================= */
+
+.sidebar.collapsed #empty-state {
+  display: none !important;
+}
+
+
+
+/* Position the Welcome Message relative so absolute elements stay inside */
+.welcome-message {
+  position: relative;
+  overflow: hidden;
+  /* Keeps stars inside the box */
+  z-index: 1;
+}
+
+/* Style the Canvas Background */
+#universeCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  /* Behind the text */
+  pointer-events: none;
+  /* Let clicks pass through to the upload button */
+}
+
+/* Ensure the text content sits ON TOP of the canvas */
+.welcome-content-wrapper {
+  position: relative;
+  z-index: 2;
+  /* Above the canvas */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+
+/* =================================================================
+   FIX: HIDE EMPTY STATE CORRECTLY
+================================================================= */
+
+/* Ensure Sidebar Empty State Container is visible by default... */
+#empty-state {
+  display: flex;
+  /* Removed !important so .hidden can override it */
+  flex-direction: column;
+  align-items: center;
+  opacity: 1;
+  padding-top: 40px;
+}
+
+/* ...but allow it to be hidden when the .hidden class is added */
+#empty-state.hidden {
+  display: none !important;
+}
+
+/* =================================================================
+   WELCOME TEXT COLOR ADJUSTMENTS
+================================================================= */
+
+.welcome-title {
+  /* Changed from var(--text-primary) to a softer, lighter grey-brown */
+  color: #5c5550 !important;
+}
+
+.welcome-description {
+  /* Changed from var(--text-secondary) to a lighter muted tone */
+  color: #857f79 !important;
+}
+
+/* Optional: In Dark Mode, keep them light/white */
+body.dark-mode .welcome-title,
+body.dark-mode .welcome-description {
+  color: #e0e0e0 !important;
+}
+
+/* =================================================================
+   FIX: SIDEBAR EMPTY STATE (COLOR & VISIBILITY)
+================================================================= */
+
+#empty-state {
+  /* 1. Allow it to be hidden (Removed !important) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+}
+
+/* 2. Ensure it actually hides when the class is added */
+#empty-state.hidden {
+  display: none !important;
+}
+
+/* 3. Style the Icon to match the Main Background Color (bg-primary) */
+.sources-icon {
+  /* Sets the icon color to the main page background color (Beige in light mode) */
+  color: var(--bg-primary) !important;
+
+  font-size: 60px !important;
+  /* Keep size large */
+  opacity: 1 !important;
+  /* Full opacity so the color is solid */
+
+  /* Reset layout properties to ensure centering */
+  width: auto !important;
+  height: auto !important;
+  background: transparent !important;
+  border: none !important;
+  margin: 0 auto 15px auto !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+/* Force children (font awesome icons) to inherit the color */
+.sources-icon i,
+.sources-icon svg {
+  color: inherit !important;
+  font-size: inherit !important;
+}
+
+
+.hidden {
+  display: none !important;
+}
+
+
+
+
+/* --- styles.css --- */
+
+/* 1. HIDE Studio Section by Default */
+.studio-section {
+  display: none;
+  /* Hidden initially */
+  width: 280px;
+  /* Set a fixed width when open */
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+/* Class to show it */
+.studio-section.visible {
+  display: flex;
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 2. STYLE the New Expand Button (Floating) */
+.workspace-expand-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  /* Circle shape */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  /* Soft shadow */
+  color: var(--text-secondary);
+  cursor: pointer;
+  z-index: 90;
+  /* Sit above chat messages */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Bouncy transition */
+  font-size: 16px;
+}
+
+.workspace-expand-btn:hover {
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+  transform: scale(1.1) rotate(-5deg);
+  /* Playful hover effect */
+  border-color: var(--accent-color);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Hide the expand button when studio is open (optional, but looks cleaner) */
+.workspace-expand-btn.hidden {
+  display: none;
+}
+
+/* Adjust the existing studio toggle button to act as a 'Close' button */
+.studio-toggle-btn {
+  transform: rotate(180deg);
+  /* Flip it to point right (Close) */
+}
+
+.studio-toggle-btn:hover {
+  color: var(--destructive-red);
+  /* Indicate closing action */
+}
+
+
+/* =================================================================
+   FIX: CHAT LAYOUT & OVERLAP
+================================================================= */
+
+/* 1. Fix Top Overlap & Center Content */
+.chat-messages {
+  /* Add extra top padding so the first message doesn't hide behind the top-right button */
+  padding-top: 80px !important;
+
+  /* Center the chat column for a professional look */
+  width: 100%;
+  max-width: 900px;
+  /* Limits width so lines aren't too long on big screens */
+  margin: 0 auto;
+  /* Centers the container */
+
+  /* Ensure bottom padding so text doesn't hit the input box immediately */
+  padding-bottom: 40px;
+}
+
+/* 2. Fix Message Bubble Alignment in the Centered Layout */
+.message {
+  width: 100%;
+  /* container takes full width of the max-900px parent */
+  display: flex;
+  margin-bottom: 15px;
+  /* Better spacing between messages */
+}
+
+/* Ensure User message stays on the right */
+.message.user {
+  justify-content: flex-end;
+}
+
+/* Ensure AI message stays on the left */
+.message.ai {
+  justify-content: flex-start;
+}
+
+/* 3. Refine Message Bubbles */
+.message-content {
+  max-width: 85%;
+  /* Prevents bubbles from being too wide */
+  padding: 12px 18px;
+  /* Slightly more breathing room */
+  font-size: 15px;
+  /* Readable font size */
+  line-height: 1.6;
+  border-radius: 18px;
+  /* Softer, more modern corners */
+}
+
+/* Specific fix for User Bubble overlap on scroll */
+/* We add a small margin to the user bubble so it doesn't touch the absolute edge */
+.message.user .message-content {
+  margin-right: 5px;
+}
+
+
+/* =================================================================
+   FIX: INPUT AREA WIDTH MATCHING
+================================================================= */
+
+/* Ensure the input container matches the chat width for symmetry */
+.chat-input-container {
+  max-width: 900px !important;
+  /* Matches .chat-messages max-width */
+  width: 95%;
+  /* Responsive on mobile */
+  margin: 0 auto;
+}
+
+/* Ensure the wrapper holding the input is positioned correctly */
+.chat-input-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* Space from bottom edge */
+  background: transparent !important;
+  /* No background strip */
+}
+
+
+
+/* =================================================================
+   FIX: FONT & SIZE FOR PROFESSIONAL LOOK
+================================================================= */
+
+/* 1. Force Clean Font for Chat Messages */
+.chat-messages .message-content {
+  font-family: "Inter", sans-serif !important;
+  /* Overrides the cursive font */
+  font-size: 15px !important;
+  /* Professional readable size */
+  line-height: 1.6 !important;
+  /* Better spacing between lines */
+  letter-spacing: 0.2px;
+  /* Clean text rendering */
+  font-weight: 400;
+  /* Normal weight */
+}
+
+/* 2. Fix the Input Box Font */
+.chat-input {
+  font-family: "Inter", sans-serif !important;
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+}
+
+/* 3. Ensure Code Blocks (if any) use a monospace font */
+pre,
+code {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+  font-size: 13px !important;
+}
+
+/* 4. Optional: If you want the "Welcome" text to also be clean */
+.welcome-description {
+  font-family: "Inter", sans-serif !important;
+  font-size: 14px !important;
+}
+
+/* 5. Fix Message Bubble Width Consistency */
+.message-content {
+  width: auto;
+  display: inline-block;
+  max-width: 100%;
+  /* Prevents breaking */
+}
+
+/* 6. Dark Mode Text Polish */
+body.dark-mode .message-content {
+  font-weight: 300;
+  /* Slightly thinner text looks better on dark backgrounds */
+}
+
+
+
+/* =================================================================
+   FIX: EXPANDED TOOL PANEL HEIGHT (TeamSpace)
+================================================================= */
+
+/* 1. Make the Expanded Section a Flex Container (No Scroll on Parent) */
+.studio-section.expanded {
+  display: flex !important;
+  flex-direction: column !important;
+  height: calc(100% - 16px) !important;
+  /* Fill height minus top/bottom margins */
+  overflow: hidden !important;
+  /* Stop the main panel from scrolling */
+}
+
+/* 2. Make the Wrapper Fill Available Space */
+.studio-section.expanded #toolDetailsWrapper {
+  flex: 1;
+  /* Grow to fill the panel */
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  /* Crucial for nested scrollbars */
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 3. Make the Content Area Fill Wrapper */
+.studio-section.expanded #toolDetailsContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  padding: 0;
+  /* Remove padding to let children touch edges */
+  overflow: hidden;
+}
+
+/* 4. Make TeamSpace View Fill Content Area */
+#sarthiChatStudioView {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+/* 5. Fix List View Container */
+#doc-panel-main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+/* 6. Make the Friend List Scrollable (and fill space) */
+#doc-friend-list-container {
+  flex: 1;
+  overflow-y: auto;
+  /* Scroll bar appears here */
+  height: auto;
+}
+
+/* 7. Fix Chat View Container */
+#doc-panel-chat-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+/* 8. Make Messages Scrollable (and fill space) */
+#doc-chat-messages-panel {
+  flex: 1;
+  overflow-y: auto;
+  /* Scroll bar appears here */
+  height: auto;
+}
+
+/* 9. Ensure Input stays at bottom */
+#doc-chat-form-panel {
+  flex-shrink: 0;
+}
+
+#bg-canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  /* Behind everything */
+  pointer-events: none;
+  /* Let clicks pass through */
+  opacity: 0.6;
+  /* Subtle visibility */
+}
+
+/* =================================================================
+   HIDE SCROLLBAR (GLOBAL)
+================================================================= */
+html,
+body {
+  /* Hide scrollbar for Firefox */
+  scrollbar-width: none;
+  /* Hide scrollbar for IE and Edge */
+  -ms-overflow-style: none;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+#profileDropdown {
+
+  width: 250px;
+
+}
+
+
+
+/* =================================================================
+   MODERN SHARE MODAL STYLES
+================================================================= */
+
+/* 1. Container & Layout */
+.share-modal-container {
+  max-width: 520px;
+  width: 95%;
+  border-radius: 16px;
+  overflow: visible;
+  /* Allows dropdowns if needed */
+  padding: 0;
+  background: var(--bg-secondary);
+}
+
+.share-modal-header {
+  padding: 24px 24px 10px 24px;
+  border: none;
+  align-items: flex-start;
+}
+
+.modal-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modal-subtitle {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+/* 2. Search Input */
+.share-modal-content {
+  padding: 0 24px 24px 24px;
+}
+
+.share-search-wrapper {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.share-search-wrapper .search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.share-search-input {
+  width: 100%;
+  padding: 12px 12px 12px 38px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.share-search-input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px var(--shadow-color);
+  outline: none;
+}
+
+/* 3. List Container */
+.share-list-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.share-list-container {
+  max-height: 280px;
+  overflow-y: auto;
+  /* Custom Scrollbar */
+  scrollbar-width: thin;
+  margin-bottom: 20px;
+  /* Remove default border, let items define structure */
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+/* 4. List Items (The Friends/Groups) */
+.share-user-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 4px;
+  border: 1px solid transparent;
+}
+
+.share-user-item:hover {
+  background-color: var(--bg-primary);
+  border-color: var(--border-color);
+}
+
+.share-user-item.selected {
+  background-color: var(--bg-primary);
+  border-color: var(--accent-color);
+}
+
+/* Avatar area */
+.share-avatar-wrapper {
+  position: relative;
+  margin-right: 12px;
+}
+
+.share-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}
+
+.share-avatar.team-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Text area */
+.share-user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  /* Prevents text overflow */
+}
+
+.share-user-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.share-user-email {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* 5. Permission Select Dropdown */
+.share-access-select {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  margin-right: 12px;
+  text-align: right;
+  outline: none;
+}
+
+.share-access-select:hover {
+  background-color: var(--border-color);
+  /* Subtle hover bg */
+  color: var(--text-primary);
+}
+
+/* 6. Custom Circular Checkbox (reused style) */
+.share-checkbox-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.share-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.share-checkbox:checked {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' width='14px' height='14px'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* 7. Footer */
+.share-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.share-footer-left {
+  font-size: 12px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.share-footer-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-cancel {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.btn-cancel:hover {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.share-submit-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 50px;
+  background: var(--accent-color);
+  color: var(--accent-text);
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.share-submit-btn:hover {
+  transform: translateY(-1px);
+  background: var(--accent-hover);
+}
+
+
+
+/* =================================================================
+   SHARED NOTEBOOK CARD (Chat)
+================================================================= */
+
+/* The Container Box */
+.shared-notebook-card {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 12px 16px;
+  max-width: 320px;
+  width: 100%;
+  margin: 10px auto;
+  /* Center it in the chat stream */
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover Effect */
+.shared-notebook-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-color);
+  box-shadow: 0 8px 16px var(--shadow-color);
+}
+
+/* Accent border on the left for style */
+.shared-notebook-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: var(--accent-color);
+}
+
+/* The Icon Circle */
+.sn-icon-wrapper {
+  width: 42px;
+  height: 42px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-right: 14px;
+  flex-shrink: 0;
+  border: 1px solid var(--border-color);
+}
+
+/* Text Container */
+.sn-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+  /* Prevents text overflow issues */
+}
+
+/* "User shared a notebook" label */
+.sn-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-bottom: 3px;
+  font-weight: 500;
+}
+
+/* The Notebook Title */
+.sn-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* The "Open >" action part */
+.sn-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-color);
+  margin-left: 10px;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.shared-notebook-card:hover .sn-action {
+  opacity: 1;
+}
+
+/* Dark mode specific tweak if needed */
+body.dark-mode .sn-icon-wrapper {
+  background-color: var(--bg-primary);
+  /* Darker background for icon */
+}
+
+
+/* =================================================================
+   SHARED NOTEBOOK CARD STYLE
+================================================================= */
+.message.system-share {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* Center the card in the chat stream */
+  margin: 15px 0;
+}
+
+.shared-notebook-card {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 12px 16px;
+  width: 100%;
+  max-width: 340px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.shared-notebook-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-color);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Colored decorative strip on the left */
+.shared-notebook-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background: linear-gradient(to bottom, var(--accent-color), #4a90e2);
+}
+
+/* Icon Container */
+.sn-icon-box {
+  width: 44px;
+  height: 44px;
+  background-color: var(--bg-primary);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-right: 14px;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Text Info */
+.sn-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.sn-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-bottom: 2px;
+  letter-spacing: 0.5px;
+}
+
+.sn-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Action Arrow */
+.sn-arrow {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-left: 10px;
+  opacity: 0.7;
+  transition: transform 0.2s ease;
+}
+
+.shared-notebook-card:hover .sn-arrow {
+  transform: translateX(3px);
+  color: var(--accent-color);
+  opacity: 1;
+}
+
+
+/* --- Report Board Styles --- */
+.report-board-container {
+  padding: 16px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.report-header-section {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Stats Cards Grid */
+.report-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-color);
+}
+
+.stat-icon {
+  font-size: 14px;
+  color: var(--accent-color);
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+}
+
+/* Report Sections */
+.report-section {
+  margin-bottom: 24px;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  /* Optional: subtle border for distinct sections */
+  border: 1px solid var(--border-color);
+  padding: 12px;
+}
+
+.report-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+}
+
+.report-section-title i {
+  color: var(--accent-color);
+}
+
+.report-text-block {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  text-align: justify;
+}
+
+.report-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.report-bullet-list li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.report-bullet-list li::before {
+  content: "•";
+  color: var(--accent-color);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  font-size: 16px;
+  line-height: 1;
+}
+
+
+/* --- Compact Dashboard Styles --- */
+
+.report-board-container {
+  padding: 16px;
+  height: 100%;
+  overflow-y: auto;
+  background-color: var(--bg-secondary);
+}
+
+/* Header */
+.report-compact-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.report-main-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.report-meta-row {
+  font-size: 11px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.live-badge {
+  color: #10b981;
+  /* Green */
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.blink-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #10b981;
+  border-radius: 50%;
+  animation: blinker 1.5s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Stats Grid - Small & Tight */
+.stats-grid-compact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  /* Small gap */
+  margin-bottom: 16px;
+}
+
+.stat-box {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px;
+  /* Reduced padding */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 70px;
+  /* Fixed small height */
+}
+
+.stat-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+}
+
+.stat-icon-tiny {
+  font-size: 12px;
+  color: var(--accent-color);
+  opacity: 0.7;
+}
+
+.stat-number {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+/* Report Blocks */
+.report-block {
+  margin-bottom: 16px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.block-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: 6px;
+}
+
+.synthesis-text {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  text-align: justify;
+}
+
+/* Topic Tags (Pill Shape) */
+.topic-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.topic-tag {
+  font-size: 10px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+/* Action Matrix Items */
+.action-item {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.action-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.action-icon {
+  margin-top: 2px;
+}
+
+.action-icon.critical {
+  color: #ef4444;
+}
+
+.action-icon.info {
+  color: #3b82f6;
+}
+
+.action-text {
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.icon-action-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.icon-action-btn:hover {
+  color: var(--accent-color);
+}
+
+
+
+/* --- New Report Board Styles --- */
+
+/* Hide Scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.report-board-container {
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+  background-color: var(--bg-secondary);
+}
+
+/* Minimal Header */
+.report-compact-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.live-badge-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(16, 185, 129, 0.1);
+  /* Light Green */
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.pulsing-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #10b981;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.live-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: #10b981;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+/* Compact Stats Grid */
+.stats-grid-compact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.stat-box {
+  background: var(--bg-primary);
+  /* Uses your theme color */
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 80px;
+}
+
+.stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.stat-value-text {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Report Blocks */
+.report-block {
+  margin-bottom: 20px;
+}
+
+.block-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Highlight Block (Design Blueprint) */
+.highlight-block {
+  background: var(--bg-primary);
+  border: 1px solid var(--accent-color);
+  /* Highlight border */
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.highlight-block .block-title {
+  color: var(--accent-color);
+}
+
+/* Design List Items */
+.design-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.design-item i {
+  color: var(--accent-color);
+  margin-top: 3px;
+}
+
+.synthesis-text {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  text-align: justify;
+}
+
+/* Timeline */
+.timeline-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 13px;
+}
+
+.timeline-date {
+  font-family: monospace;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* --- Report Studio Grid Styles --- */
+
+.report-grid-container {
+  padding: 10px;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.grid-title {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.formats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* 2 columns */
+  gap: 15px;
+}
+
+.format-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.format-card:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px var(--shadow-color);
+  background: var(--bg-secondary);
+}
+
+.f-icon {
+  font-size: 20px;
+  color: var(--accent-color);
+  margin-bottom: 12px;
+  background: rgba(0, 0, 0, 0.05);
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.f-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.f-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Back button in header */
+.icon-action-btn.hidden {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* --- Updated Report Studio Styles --- */
+
+.formats-grid {
+  display: grid;
+  /* 3 Columns forced */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.format-card {
+  background: var(--bg-secondary);
+  /* Match modal bg */
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  min-height: 110px;
+}
+
+.format-card:hover {
+  background: var(--bg-primary);
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Smaller, Cleaner Icons */
+.f-icon {
+  font-size: 16px;
+  color: var(--accent-color);
+  margin-bottom: 10px;
+  background: rgba(0, 0, 0, 0.03);
+  /* Very subtle bg */
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Smaller Titles */
+.f-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  letter-spacing: 0.2px;
+}
+
+/* Smaller Description */
+.f-desc {
+  font-size: 11px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+/* Modal tweaks */
+.modal-title {
+  font-family: 'Inter', sans-serif;
+  /* Clean font */
+}
+
+
+/* Clean Report Typography */
+.synthesis-text p {
+  margin-bottom: 10px;
+}
+
+.synthesis-text ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.synthesis-text li {
+  margin-bottom: 4px;
+}
+
+/* Ensure bold text stands out without being overwhelming */
+.synthesis-text strong {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+
+/* --- Control Center Styles --- */
+
+.control-center-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.cc-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+}
+
+.cc-metrics {
+  display: flex;
+  align-items: center;
+}
+
+/* The Grid Layout */
+.cc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* Two columns */
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* General Card Style */
+.cc-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.cc-card-header {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Date/Deadline Card Specifics */
+.date-card .cc-card-header {
+  color: #f59e0b;
+}
+
+/* Orange */
+.cc-date-badge {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Risk Card Specifics */
+.risk-card {
+  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.risk-card .cc-card-header {
+  color: #ef4444;
+}
+
+.risk-item {
+  color: #b91c1c;
+  font-size: 13px;
+  margin-bottom: 6px;
+  display: flex;
+  gap: 8px;
+}
+
+/* Action Items */
+.action-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--border-color);
+  font-size: 14px;
+}
+
+.action-item.checked span {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+/* Responsive adjustment */
+@media (max-width: 1200px) {
+  .cc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cc-card[style*="grid-column: span 2"] {
+    grid-column: span 1 !important;
+  }
+}
+
+/* =================================================================
+   FIXED: CHAT UI, BUBBLE WIDTH & READ MORE
+================================================================= */
+
+/* 1. Main Bubble Container */
+.message-bubble {
+  /* WhatsApp standard width */
+  min-width: 100px;
+  width: fit-content;
+  padding: 10px 14px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  border-radius: 12px;
+  /* Softer WhatsApp-like corners */
+  margin-bottom: 6px;
+  position: relative;
+  word-wrap: break-word;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  /* Subtle shadow */
+}
+
+/* 2. Sent Message (Right - Green/Accent) */
+.message-bubble.sent {
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+  border-bottom-right-radius: 4px;
+  /* WhatsApp style */
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+/* 3. Received Message (Left - White/Secondary) */
+.message-bubble.received {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  /* Subtle border for contrast */
+  border-bottom-left-radius: 4px;
+  /* WhatsApp style */
+  align-self: flex-start;
+  margin-right: auto;
+}
+
+/* 4. "Read More" Link Styling */
+.chat-read-more {
+  color: inherit;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  margin-top: 4px;
+  display: inline-block;
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.chat-read-more:hover {
+  opacity: 1;
+}
+
+/* 5. Hidden content class */
+.chat-hidden-content {
+  display: none;
+}
+
+/* 6. Sender Name (in Groups) */
+.sender-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-color);
+  /* Use accent color for names */
+  margin-bottom: 4px;
+  display: block;
+  opacity: 0.9;
+}
+
+/* 7. Ensure Panel Padding */
+.chat-messages-panel {
+  padding: 15px 20px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+
+/* --- IntelliAlert Styles --- */
+
+.alert-feed {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.alert-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  transition: transform 0.2s;
+}
+
+.alert-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+/* Severity Colors */
+.alert-card.danger {
+  border-left: 4px solid #ef4444;
+  background: linear-gradient(90deg, rgba(239, 68, 68, 0.05) 0%, var(--bg-primary) 100%);
+}
+
+.alert-card.warning {
+  border-left: 4px solid #f59e0b;
+}
+
+.alert-card.financial {
+  border-left: 4px solid #3b82f6;
+}
+
+.alert-icon {
+  font-size: 18px;
+  padding-top: 2px;
+}
+
+.danger .alert-icon {
+  color: #ef4444;
+}
+
+.warning .alert-icon {
+  color: #f59e0b;
+}
+
+.financial .alert-icon {
+  color: #3b82f6;
+}
+
+.alert-content {
+  flex: 1;
+}
+
+.alert-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.alert-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.alert-date {
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--bg-secondary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.alert-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+
+/* =================================================================
+   FIX: INTELLIALERT SCROLLING
+================================================================= */
+
+/* 1. Ensure the view takes full height and allows scrolling */
+#intelliAlertView {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  /* Crucial for nested flex scrolling */
+  overflow-y: auto;
+  /* Enables vertical scrolling */
+}
+
+/* 2. Ensure the inner feed container grows correctly */
+.alert-feed {
+  padding: 16px;
+  padding-bottom: 40px;
+  /* Extra space at bottom for scrolling comfort */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 3. Hide Scrollbar (Chrome, Safari, Opera) */
+#intelliAlertView::-webkit-scrollbar {
+  display: none;
+}
+
+/* 4. Hide Scrollbar (Firefox, IE, Edge) */
+#intelliAlertView {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+
+/* =================================================================
+   QUICK NOTES TOOL STYLES
+================================================================= */
+
+/* Container for the view */
+#quickNotesView {
+  padding: 16px;
+  background-color: var(--bg-secondary);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Input Area (Floating at top) */
+.note-input-container {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  flex-shrink: 0;
+}
+
+.note-input-container textarea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.note-input-container button {
+  background: var(--accent-color);
+  color: var(--accent-text);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+  align-self: flex-end;
+  /* Align to bottom of textarea */
+}
+
+.note-input-container button:hover {
+  transform: scale(1.1);
+}
+
+/* Notes List (Scrollable) */
+.notes-list-container {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 20px;
+}
+
+/* Hide scrollbar */
+.notes-list-container::-webkit-scrollbar {
+  display: none;
+}
+
+.notes-list-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Individual Note Card */
+.note-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 14px;
+  position: relative;
+  transition: all 0.2s ease;
+  animation: fadeIn 0.3s ease;
+}
+
+.note-card:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.note-content {
+  font-size: 13.5px;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  /* Preserves line breaks */
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.note-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px dashed var(--border-color);
+  padding-top: 8px;
+  margin-top: 8px;
+}
+
+.note-date {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.note-delete-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 12px;
+  opacity: 0;
+  /* Hidden by default */
+  transition: opacity 0.2s;
+}
+
+.note-card:hover .note-delete-btn {
+  opacity: 1;
+  /* Show on hover */
+}
+
+.note-delete-btn:hover {
+  color: var(--destructive-red);
+}
+
+
+
+
+
+
+/* --------------------------------------------------------------- 
+   REVISED: QUICK NOTES TOOL STYLES (Add or replace existing styles)
+--------------------------------------------------------------- */
+#quickNotesView {
+  padding: 0;
+  /* Remove padding here, add to body instead for full height */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.notes-body {
+  flex: 1;
+  overflow: hidden;
+  /* Manage overflow of sub-views */
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Toggle Button for Add/View */
+.toggle-notes-view-btn {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.toggle-notes-view-btn:hover {
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+  border-color: var(--accent-color);
+}
+
+/* Sub-views */
+.note-sub-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Textarea for adding note */
+#noteTextarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 13px;
+  resize: none;
+  flex: 1;
+  min-height: 150px;
+  transition: border-color 0.2s ease;
+}
+
+#noteTextarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 1px var(--accent-color);
+}
+
+/* Notes List Container (Scrollable Area) */
+#notes-list-container {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 4px;
+  /* Space for scrollbar */
+}
+
+/* Individual Note Card (Better Look) */
+.note-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  /* Slightly larger radius */
+  padding: 16px;
+  position: relative;
+  transition: all 0.2s ease;
+  cursor: default;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  /* Subtle shadow */
+}
+
+.note-card:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  /* Slight hover lift */
+}
+
+.note-content {
+  font-size: 13px;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  line-height: 1.6;
+  /* Better readability */
+  margin-bottom: 12px;
+}
+
+.note-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border-color);
+  padding-top: 8px;
+  margin-top: 4px;
+}
+
+/* Note Delete Button */
+.note-actions-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 4px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 0.2s ease;
+}
+
+.note-actions-btn:hover {
+  color: var(--destructive-red);
+  /* Uses your existing destructive-red variable */
+}

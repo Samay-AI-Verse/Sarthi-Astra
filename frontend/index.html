@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sarthi Astra</title>
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Licorice&family=Playwrite+US+Modern&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+  <div id="bg-canvas-container"></div>
+  <header class="header">
+
+    <div class="logo">
+      <div class="logo-icon">
+        <img src="/static/images/logo2.png" alt="Light Mode Logo" class="logo-img light-logo">
+        <img src="/static/images/logo2.png" alt="Dark Mode Logo" class="logo-img dark-logo">
+      </div>
+      Sarthi Astra
+    </div>
+    <div class="header-right">
+
+      <button class="settings-btn" id="teamSpacesBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-yin-yang"
+          viewBox="0 0 16 16">
+          <path d="M9.167 4.5a1.167 1.167 0 1 1-2.334 0 1.167 1.167 0 0 1 2.334 0" />
+          <path
+            d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M1 8a7 7 0 0 1 7-7 3.5 3.5 0 1 1 0 7 3.5 3.5 0 1 0 0 7 7 7 0 0 1-7-7m7 4.667a1.167 1.167 0 1 1 0-2.334 1.167 1.167 0 0 1 0 2.334" />
+        </svg>
+        TeamSpaces
+        <span class="notification-dot hidden"></span>
+      </button>
+
+      <button class="settings-btn" id="settingsBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-wide"
+          viewBox="0 0 16 16">
+          <path
+            d="M8.932.727c-.243-.97-1.62-.97-1.864 0l-.071.286a.96.96 0 0 1-1.622.434l-.205-.211c-.695-.719-1.888-.03-1.613.931l.08.284a.96.96 0 0 1-1.186 1.187l-.284-.081c-.96-.275-1.65.918-.931 1.613l.211.205a.96.96 0 0 1-.434 1.622l-.286.071c-.97.243-.97 1.62 0 1.864l.286.071a.96.96 0 0 1 .434 1.622l-.211.205c-.719.695-.03 1.888.931 1.613l.284-.08a.96.96 0 0 1 1.187 1.187l-.081.283c-.275.96.918 1.65 1.613.931l.205-.211a.96.96 0 0 1 1.622.434l.071.286c.243.97 1.62.97 1.864 0l.071-.286a.96.96 0 0 1 1.622-.434l.205.211c.695.719 1.888.03 1.613-.931l-.08-.284a.96.96 0 0 1 1.187-1.187l.283.081c.96.275 1.65-.918.931-1.613l-.211-.205a.96.96 0 0 1 .434-1.622l.286-.071c.97-.243.97-1.62 0-1.864l-.286-.071a.96.96 0 0 1-.434-1.622l.211-.205c.719-.695.03-1.888-.931-1.613l-.284.08a.96.96 0 0 1-1.187-1.186l.081-.284c.275-.96-.918-1.65-1.613-.931l-.205.211a.96.96 0 0 1-1.622-.434zM8 12.997a4.998 4.998 0 1 1 0-9.995 4.998 4.998 0 0 1 0 9.996z" />
+        </svg>Settings
+      </button>
+
+      <div id="settingsDropdown" class="dropdown-menu">
+        <a href="#" class="dropdown-item">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zM11 16h2v-2h-2v2zm1-10c-1.66 0-3 1.34-3 3h2c0-.55.45-1 1-1s1 .45 1 1c0 1-1.5 1.25-1.5 2.5h2c0-.69 1.5-.94 1.5-2.5 0-1.66-1.34-3-3-3z">
+            </path>
+          </svg>
+          <span>Sarthi Astra Help</span>
+        </a>
+        <a href="#" class="dropdown-item preferences-link" id="preferencesLink">
+          <i class="fa fa-sliders" aria-hidden="true"></i>
+          <span>Preferences</span>
+        </a>
+      </div>
+      <button class="profile-btn" id="profileBtn">
+        <img src="https://i.pinimg.com/736x/fa/d5/e7/fad5e79954583ad50ccb3f16ee64f66d.jpg" id="profileImg"
+          alt="User Profile Image" referrerpolicy="no-referrer">
+
+      </button>
+    </div>
+  </header>
+
+  <div id="mainContentWrapper" class="main-content-wrapper">
+
+    <div class="container">
+      <div class="welcome-message">
+        <h1>Welcome to Sarthi Astra</h1>
+      </div>
+      <div class="nav-controls-container">
+        <div class="nav-tabs">
+          <button class="nav-tab active" data-tab="all">All</button>
+          <button class="nav-tab" data-tab="my">My Spaces</button>
+          <button class="nav-tab" data-tab="featured">Departmental
+            collaboration</button>
+        </div>
+
+        <div class="controls-bar">
+          <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle theme">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.106a.75.75 0 010 1.06l-1.591 1.59a.75.75 0 11-1.06-1.06l1.59-1.59a.75.75 0 011.06 0zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.803 17.803a.75.75 0 01-1.06 0l-1.59-1.591a.75.75 0 111.06-1.06l1.59 1.59a.75.75 0 010 1.06zM12 21a.75.75 0 01-.75-.75v-2.25a.75.75 0 011.5 0V20.25a.75.75 0 01-.75.75zM6.106 18.894a.75.75 0 011.06 0l1.59 1.59a.75.75 0 01-1.06 1.06l-1.59-1.59a.75.75 0 010-1.06zM3 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3.75A.75.75 0 013 12zM6.697 6.697a.75.75 0 010-1.06l1.59-1.591a.75.75 0 111.06 1.06l-1.59 1.59a.75.75 0 01-1.06 0z">
+              </path>
+            </svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 004.463-.949a.75.75 0 01.819.162l.805.805a.75.75 0 01-.004 1.064A11.25 11.25 0 0112 21a11.25 11.25 0 01-9.472-5.452a.75.75 0 011.064-.004l.805.805a.75.75 0 01.819.162z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </button>
+          <button class="create-btn" onclick="openCreateModal()">
+            + Create new
+          </button>
+        </div>
+      </div>
+
+
+      <section class="recent-section" id="my-spaces-section">
+        <h2 class="section-title">Recent Spaces</h2>
+        <div class="recent-grid" id="recent-grid">
+          <div class="recent-card create-new-card" onclick="openCreateModal()">
+            <div class="plus-icon">+</div>
+            <h3 class="notebook-title">Create New Space</h3>
+          </div>
+
+        </div>
+      </section>
+      <section class="recent-section" id="shared-spaces-section">
+        <h2 class="section-title">Shared Vault</h2>
+        <div class="recent-grid" id="shared-grid">
+        </div>
+      </section>
+    </div>
+
+    <div id="createModal" class="modal">
+      <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('createModal')">&times;</button>
+        <h2>Create New Space</h2>
+        <form id="createForm">
+          <div class="form-group">
+            <label for="notebookTitle">Space title</label>
+            <input type="text" id="notebookTitle" placeholder="Enter Space title" required>
+          </div>
+          <div class="modal-buttons">
+            <button type="button" class="modal-btn secondary" onclick="closeModal('createModal')">Cancel</button>
+            <button type="submit" class="modal-btn primary">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div style="height: 100px;"></div>
+
+    <div id="profilePopup" class="profile-popup">
+      <div class="profile-popup-header">
+        <span id="profileEmail">Loading...</span>
+        <button class="close-btn" id="closeProfileBtn">&times;</button>
+      </div>
+      <div class="profile-popup-body">
+        <div class="profile-pic">
+        </div>
+        <h3 class="profile-greeting" id="profileGreetingName">Hi, Guest!</h3>
+      </div>
+
+      <div class="profile-popup-section">
+        <a href="#" class="dropdown-item js-add-friend-btn">
+          <i class="fa fa-user-plus" aria-hidden="true"></i>
+          <span>Add Friends</span>
+        </a>
+        <a href="#" class="dropdown-item" id="notifications-btn">
+          <i class="fa fa-bell" aria-hidden="true"></i>
+          <span>Notifications</span>
+          <span class="notification-badge hidden" id="notification-badge"></span>
+        </a>
+      </div>
+
+      <div class="profile-popup-section" id="notification-list-container"
+        style="display: none; max-height: 200px; overflow-y: auto;">
+      </div>
+
+      <div class="profile-popup-footer">
+        <button class="profile-btn-secondary" onclick="window.location.href='/logout'">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path
+              d="m17 7-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5-5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z">
+            </path>
+          </svg>
+          <span>Sign out</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="preferencesModal" class="modal">
+      <div class="modal-content" style="max-width: 500px;">
+        <button class="close-btn" id="closePreferencesModal">&times;</button>
+        <h2>Preferences</h2>
+        <div class="preference-section">
+          <label for="languageSelector" class="preference-label">Language</label>
+          <p class="preference-description">
+            Change the display language for the interface and the chatbot.
+          </p>
+          <select id="languageSelector" class="form-group input">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी (Hindi)</option>
+            <option value="mr">मराठी (Marathi)</option>
+            <option value="ml">മലയാളം (Malayalam)</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button class="modal-btn primary" id="savePreferencesBtn">Save
+            Changes</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <aside id="teamSpacesPanel" class="team-spaces-panel">
+    <div class="panel-header">
+      <h3>TeamSpaces</h3>
+      <button class="close-panel-btn" id="closeTeamSpacesPanel">&times;</button>
+    </div>
+    <div class="panel-body">
+
+      <!-- (Existing) Main Content (Friend List) -->
+      <div id="panel-main-content">
+        <div class="search-container">
+          <input type="text" id="friend-list-search" placeholder="Search friends..." class="panel-search-input">
+        </div>
+        <div id="friend-list-container" class="chat-list">
+          <!-- Friend list rendered here -->
+        </div>
+        <button class="add-friend-fab" id="fab-main-btn" title="More Actions">
+          <i class="fa fa-plus"></i>
+        </button>
+        <div id="fab-menu" class="fab-menu">
+          <button class="fab-menu-item" id="create-org-btn">
+            <span>New Organization</span>
+            <div class="fab-icon-wrapper">
+              <i class="fa fa-building"></i>
+            </div>
+          </button>
+          <button class="fab-menu-item" id="create-group-btn">
+            <span>Create Group</span>
+            <div class="fab-icon-wrapper">
+              <i class="fa fa-users"></i>
+            </div>
+          </button>
+          <button class="fab-menu-item" id="join-group-btn">
+            <span>Join Group</span>
+            <div class="fab-icon-wrapper">
+              <i class="fa fa-link"></i>
+            </div>
+          </button>
+          <button class="fab-menu-item js-add-friend-btn">
+            <span>Add Friend</span>
+            <div class="fab-icon-wrapper">
+              <i class="fa fa-user-plus"></i>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- (Existing) Chat View -->
+      <div id="panel-chat-view" class="hidden">
+        <div class="chat-header-panel">
+          <button id="back-to-friends-btn" class="back-btn-panel"><i class="fa fa-arrow-left"></i></button>
+          <img id="chat-friend-pic" src alt="Friend" />
+          <h4 id="chat-friend-name"></h4>
+          <div class="group-chat-options-container" style="margin-left: auto; position: relative;">
+            <button id="group-chat-options-btn" class="group-options-btn hidden" title="Group Options">
+              <i class="fa fa-cog"></i> </button>
+            <div id="group-chat-dropdown" class="dropdown-menu">
+              <button class="dropdown-item" id="manage-group-btn">
+                <i class="fa fa-users"></i>
+                <span>Manage Group</span>
+              </button>
+              <button class="dropdown-item" id="add-member-btn">
+                <i class="fa fa-user-plus"></i>
+                <span>Add Member</span>
+              </button>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item destructive-action" id="leave-group-btn">
+                <i class="fa fa-sign-out"></i>
+                <span>Leave Group</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div id="chat-messages-panel" class="chat-messages-panel">
+        </div>
+        <form id="chat-form-panel" class="chat-input-form-panel">
+          <input type="text" id="chat-input-panel" placeholder="Type a message..." autocomplete="off" />
+          <button type="submit">Send</button>
+        </form>
+      </div>
+
+      <!-- ========================================================== -->
+      <!-- NEW: "Manage Group" View (Replaces manageGroupModal) -->
+      <!-- ========================================================== -->
+      <div id="panel-manage-group-view" class="panel-view hidden">
+        <div class="panel-view-header">
+          <button class="back-btn-panel js-back-to-chat" title="Back to chat">
+            <i class="fa fa-arrow-left"></i>
+          </button>
+          <h4 id="manage-group-panel-title">Manage Group</h4>
+        </div>
+        <div class="panel-view-body">
+          <div id="group-member-list-panel" class="chat-list" style="max-height: none; overflow-y: auto;">
+            <!-- Member list will be rendered here by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================================== -->
+      <!-- NEW: "Add Member" View (Replaces addMemberModal) -->
+      <!-- ========================================================== -->
+      <div id="panel-add-member-view" class="panel-view hidden">
+        <div class="panel-view-header">
+          <button class="back-btn-panel js-back-to-chat" title="Back to chat">
+            <i class="fa fa-arrow-left"></i>
+          </button>
+          <h4>Add Members</h4>
+        </div>
+        <div class="panel-view-body">
+          <div class="form-group">
+            <label for="add-member-search-input-panel">Search by user's
+              name</label>
+            <!-- Re-using panel-search-input class for consistent styling -->
+            <input type="text" id="add-member-search-input-panel" placeholder="e.g., Jane Doe"
+              class="form-group input panel-search-input">
+          </div>
+          <div id="add-member-search-results-panel" class="chat-list"
+            style="margin-top: 16px; max-height: 200px; overflow-y: auto;">
+            <!-- Search results rendered here -->
+          </div>
+          <div class="form-group" style="margin-top: 24px;">
+            <label>Or Share Invite Code</label>
+            <p style="font-size: 13px; color: var(--text-secondary);">Anyone
+              with this code can join the group.</p>
+            <!-- Using form-group input and re-using panel-search-input for consistent styling -->
+            <input type="text" id="group-invite-code-display-panel" class="form-group input panel-search-input" readonly
+              style="text-align: center; font-weight: bold; font-size: 1.2rem; cursor: copy;" title="Click to copy">
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- End of .panel-body -->
+  </aside>
+
+  <div id="addFriendModal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal('addFriendModal')">&times;</button>
+      <h2>Add New Friend</h2>
+      <div class="form-group">
+        <label for="modal-friend-search-input">Search by user's email</label>
+        <input type="text" id="modal-friend-search-input" placeholder="e.g., user@example.com" class="form-group input">
+      </div>
+      <div id="modal-friend-search-results" class="chat-list"
+        style="margin-top: 16px; max-height: 300px; overflow-y: auto;">
+      </div>
+    </div>
+  </div>
+
+  <div id="createGroupModal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal('createGroupModal')">&times;</button>
+      <h2>Create New Group</h2>
+      <form id="createGroupForm">
+        <div class="form-group">
+          <label for="group-name-input">Group Name</label>
+          <input type="text" id="group-name-input" placeholder="e.g., Project Team" class="form-group input" required>
+        </div>
+        <div class="form-group">
+          <label>Add Members (Optional)</label>
+          <div id="group-friend-list" class="chat-list"
+            style="max-height: 200px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px; padding: 8px;">
+            <p>Loading friends...</p>
+          </div>
+        </div>
+        <div class="modal-buttons">
+          <button type="button" class="modal-btn secondary" onclick="closeModal('createGroupModal')">Cancel</button>
+          <button type="submit" class="modal-btn primary">Create
+            Group</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="joinGroupModal" class="modal">
+    <div class="modal-content" style="max-width: 450px;">
+      <button class="close-btn" onclick="closeModal('joinGroupModal')">&times;</button>
+      <h2>Join Group via Invite Code</h2>
+      <form id="joinGroupForm">
+        <div class="form-group">
+          <label for="invite-code-input">Invite Code</label>
+          <input type="text" id="invite-code-input" placeholder="Enter code" class="form-group input" required>
+        </div>
+        <div class="modal-buttons">
+          <button type="button" class="modal-btn secondary" onclick="closeModal('joinGroupModal')">Cancel</button>
+          <button type="submit" class="modal-btn primary">Join</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 
+      REMOVED:
+      - <div id="manageGroupModal" class="modal"> ... </div>
+      - <div id="addMemberModal" class="modal"> ... </div>
+      Their content is now inside the teamSpacesPanel.
+    -->
+
+  <div id="chatToastNotification" class="chat-toast toast-hidden">
+    <img id="toast-sender-pic" src alt="Sender" referrerpolicy="no-referrer">
+    <div class="toast-content">
+      <div id="toast-sender-name" class="toast-sender-name"></div>
+      <div id="toast-message-preview" class="toast-message-preview"></div>
+    </div>
+    <button id="toast-close-btn" class="toast-close-btn">&times;</button>
+  </div>
+
+  <script src="/static/js/index.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("bg-canvas-container");
+      if (!container) return;
+
+      // 1. Setup Scene
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      container.appendChild(renderer.domElement);
+
+      // --- 2. CREATE CIRCLE TEXTURE (Fixes Square Dots) ---
+      function createCircleTexture() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 32;
+        canvas.height = 32;
+        const ctx = canvas.getContext('2d');
+
+        ctx.beginPath();
+        ctx.arc(16, 16, 14, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+
+        return new THREE.CanvasTexture(canvas);
+      }
+
+      // --- 3. CREATE STARS ---
+      const starCount = 600;
+      const positions = new Float32Array(starCount * 3);
+
+      for (let i = 0; i < starCount; i++) {
+        // Spherical Math (Prevents Boxy Look)
+        const radius = 40 * Math.cbrt(Math.random());
+        const theta = Math.random() * 2 * Math.PI;
+        const phi = Math.acos(2 * Math.random() - 1);
+
+        positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta); // x
+        positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta); // y
+        positions[i * 3 + 2] = radius * Math.cos(phi); // z
+      }
+
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+      // --- 4. COLORS & MATERIAL ---
+      // Dark Mode Color: Ice Blue
+      const colorDark = new THREE.Color(0x9bccff);
+      // Light Mode Color: Charcoal (High Visibility)
+      const colorLight = new THREE.Color(0x333333);
+
+      const material = new THREE.PointsMaterial({
+        size: 0.15, // <--- MEDIUM SIZE (Fixed)
+        map: createCircleTexture(),
+        transparent: true,
+        opacity: 0.9,
+        alphaTest: 0.5, // Removes square edges
+        color: document.body.classList.contains("dark-mode") ? colorDark : colorLight,
+      });
+
+      const starsMesh = new THREE.Points(geometry, material);
+      scene.add(starsMesh);
+
+      camera.position.z = 15;
+
+      // --- 5. MOUSE INTERACTION (Low Sensitivity) ---
+      let mouseX = 0;
+      let mouseY = 0;
+      let time = 0;
+
+      const windowHalfX = window.innerWidth / 2;
+      const windowHalfY = window.innerHeight / 2;
+
+      document.addEventListener('mousemove', (event) => {
+        // <--- SENSITIVITY FIX: Extremely low multiplier (0.00005)
+        mouseX = (event.clientX - windowHalfX) * 0.00005;
+        mouseY = (event.clientY - windowHalfY) * 0.00005;
+      });
+
+      // --- 6. ANIMATION LOOP ---
+      const animate = () => {
+        // 1. Auto-Rotation (Constant slow drift)
+        time += 0.0005;
+
+        // 2. Apply Rotation (Auto + Very Gentle Mouse Tilt)
+        starsMesh.rotation.y = time + (mouseX * 0.8);
+        starsMesh.rotation.x = mouseY * 0.8;
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      };
+      animate();
+
+      // --- 7. RESIZE HANDLER ---
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      // --- 8. THEME OBSERVER ---
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.attributeName === 'class') {
+            const isDark = document.body.classList.contains("dark-mode");
+            material.color = isDark ? colorDark : colorLight;
+          }
+        });
+      });
+      observer.observe(document.body, { attributes: true });
+    });
+  </script>
+
+
+
+
+</body>
+
+</html>

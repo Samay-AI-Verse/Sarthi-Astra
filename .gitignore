@@ -1,0 +1,13 @@
+# Ignore entire backend folder
+backend/
+
+# Ignore virtual environments and dependencies
+env/
+*.pyd
+*.dll
+*.pdf
+
+# VSCode and Python cache
+__pycache__/
+.vscode/
+*.pyc
